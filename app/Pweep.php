@@ -28,4 +28,9 @@ class Pweep extends Model
     {
         return $this->hasOne('App\Pweep', 'initial_pweep_id', 'id');
     }
+
+    public function hashtags()
+    {
+        return $this->belongsToMany('App\Hashtag');
+    }
 }

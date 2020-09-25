@@ -15,6 +15,7 @@ class EditUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('pseudo');
+            $table->boolean('isAdmin');
             $table->string('description')->nullable();
             $table->string('image_path')->nullable();
             $table->string('banner_path')->nullable();
