@@ -31,6 +31,6 @@ class Pweep extends Model
 
     public function hashtags()
     {
-        return $this->belongsToMany('App\Hashtag');
+        return $this->belongsToMany('App\Hashtag', 'pweeps_hashtags', 'hashtag_id', 'pweep_id');
     }
 }

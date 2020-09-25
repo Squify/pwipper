@@ -13,6 +13,6 @@ class Hashtag extends Model
 
     public function pweeps()
     {
-        return $this->belongsToMany('App\Pweep');
+        return $this->belongsToMany('App\Pweep', 'pweeps_hashtags', 'pweep_id', 'hashtag_id');
     }
 }
