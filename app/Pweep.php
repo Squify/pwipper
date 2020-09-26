@@ -8,8 +8,18 @@ class Pweep extends Model
 {
     protected $table = "pweeps";
     protected $fillable = [
-        'message', 'image_path_1', 'image_path_2', 'image_path_3', 'image_path_4', 'is_deleted', 'initial_pweep_id'
+        'message',
+        'image_path_1',
+        'image_path_2',
+        'image_path_3',
+        'image_path_4',
+        'is_deleted',
+        'initial_pweep_id'
     ];
+    public function author()
+    {
+        return $this->hasOne('App\User', 'id', 'author_id');
+    }
 
     /**
      * Get all replies of the pweep
