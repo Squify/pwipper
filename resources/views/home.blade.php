@@ -16,9 +16,14 @@
                         <h5 class="card-title">{{$pweep->id}}</h5>
                         <p class="card-text">{{$pweep->message}}</p>
                         <p>Pweep crée le {{$pweep->created_at->format('d/m/Y à H:m')}}</p>
+                        <a href="#" class="btn btn-warning">Modifier</a>
+                        <form method="post" action="{{route('deletePweep', $pweep->id)}}">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
                     </div>
                 </div>
-                <br/>
             </div>
         @endforeach
     </div>
