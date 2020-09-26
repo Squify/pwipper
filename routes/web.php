@@ -22,3 +22,4 @@ Route::get('/', function () {
  * Route Pweeps
  */
 Route::get('/home', 'PweepController@index')->name('pweep');
+Route::delete('/home/{id}', 'PweepController@remove')->name('deletePweep');
