@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts/base');
 });
+
+
+/**
+ * Route Pweeps
+ */
+Route::get('/home', 'PweepController@index')->name('pweep');
