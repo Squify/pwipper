@@ -1,0 +1,78 @@
+/* SCSS HEX */
+
+.navbar {
+  background-color: #0B1116;
+  margin-bottom: 15px;
+}
+
+.search-bar input {
+  background: #253341;
+  border-color: #253341;
+}
+
+.search-bar .search-button {
+  background: #253341;
+  border-color: #253341;
+  color: whitesmoke;
+}
+
+.brand {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px !important;
+  /* 50% of your logo width */
+  display: block;
+}
+
+body {
+  background-color: #15202B;
+  color: whitesmoke;
+}
+
+#navbarToggler a {
+  color: whitesmoke;
+}
+
+.main-container {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.main-container .new-pweep {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.main-container .new-pweep textarea {
+  min-height: 75px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.main-container .divider-section {
+  height: 10px;
+  background-color: #253341;
+}
+
+.main-container .pweep-list .pweep {
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.grey-thin-border {
+  border-left: 1px solid #38444D;
+  border-right: 1px solid #38444D;
+  border-top: 1px solid #38444D;
+}
+
+.profile_pic {
+  height: 65px;
+  width: 65px;
+  background-color: transparent;
+  border: unset;
+}
+
