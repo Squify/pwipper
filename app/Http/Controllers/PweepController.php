@@ -23,4 +23,10 @@ class PweepController extends Controller
         $pweep->delete($id);
         return back();
     }
+
+    //Add and store pweep in db
+    public function add(){
+        $pweeps = Pweep::all();
+        return view('addPweep')->with('pweeps', $pweeps);
+    }
 }
