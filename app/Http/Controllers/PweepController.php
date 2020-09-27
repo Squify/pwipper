@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PweepController
 {
-
     /**
      * View of home with all posts
      * @return \Illuminate\Contracts\View\Factory\Illuminate\View\View
