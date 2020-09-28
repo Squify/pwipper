@@ -15,7 +15,7 @@
                               class="form-control"></textarea>
                 </div>
                 <hr color="#38444D">
-                <div style="display: flex; flex-direction: row; align-content: space-between">
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
                     <div class="buttons">
                         <a href="#">
                             <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor"
@@ -51,13 +51,33 @@
                         </picture>
                     </div>
                     <div class="col-10">
-                        <p><b>{{ $pweep->author->name }}</b> {{ '@' . $pweep->author->pseudo }} ·
-                            <small>{{ $pweep->created_at }}</small></p>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div class="left">
+                                <p style="display: flex; flex-direction: row; justify-content: space-around;">
+                                    <b>{{ $pweep->author->name . ' _'}}</b>{{' @' . $pweep->author->pseudo }} ·
+                                    <small>{{ $pweep->created_at->format('H:m') }}</small> 
+                                </p>
+                            </div>
+                            <div class="right">
+                                <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <svg style="overflow: auto scroll;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                                    </svg>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Editer</a>
+                                        <!-- Bootstrap modal améliorer -->
+                                        <a class="dropdown-item" href="{{route('deletePweep', $pweep->id)}}">Supprimer</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Signaler</a>
+                                    </div>
+                                </a>
+                                
+                            </div>
+                        </div>
                         <p>{{ $pweep->message }}</p>
                     </div>
                 </div>
             @endforeach
-
         </div>
     </div>
 @endsection

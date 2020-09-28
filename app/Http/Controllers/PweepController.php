@@ -19,4 +19,14 @@ class PweepController
         $pweeps = Pweep::orderBy('created_at', 'DESC')->get();
         return view('homepage')->with('pweeps', $pweeps);
     }
+
+    /**
+     * Delete pweep
+     */
+    public function remove($id)
+        {
+            $pweep = Pweep::findOrFail($id);
+            $pweep->delete($id);
+            return back();
+        }
 }

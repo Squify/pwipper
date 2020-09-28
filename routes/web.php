@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PweepController@index')->name('homepage');
+Route::get('/{id}', 'PweepController@remove')->name('deletePweep');
