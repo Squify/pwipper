@@ -3,6 +3,14 @@
 .navbar {
   background-color: #0B1116;
   margin-bottom: 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 999999;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
 }
 
 .search-bar input {
@@ -10,10 +18,28 @@
   border-color: #253341;
 }
 
+.search-bar input :active {
+  background: #35495B;
+  border-color: #35495B;
+}
+
+.search-bar .input-group-prepend:hover {
+  cursor: pointer;
+}
+
 .search-bar .search-button {
   background: #253341;
   border-color: #253341;
   color: whitesmoke;
+}
+
+.search-bar .dropdown-menu {
+  background: #253341;
+}
+
+.search-bar .dropdown-menu :hover {
+  background: #35495B;
+  border-color: #35495B;
 }
 
 .brand {
@@ -27,6 +53,10 @@
 body {
   background-color: #15202B;
   color: whitesmoke;
+}
+
+.base-container {
+  padding-top: 55px;
 }
 
 #navbarToggler a {
@@ -70,9 +100,22 @@ body {
 }
 
 .profile_pic {
-  height: 65px;
-  width: 65px;
+  height: 3em;
+  width: 3em;
   background-color: transparent;
   border: unset;
+}
+
+.card {
+  background-color: #35495B;
+  border: #35495B;
+}
+
+.card .card-header {
+  background-color: #253341;
+}
+
+.card .btn-submit {
+  background-color: #1B7CB8;
 }
 

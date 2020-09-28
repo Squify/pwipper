@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="detailsPost_container">
-    <h1>Bienvenur sur Pweep</h1>
+    <h1>Bienvenue sur Pweep</h1>
 
     <div class="row center">
         @foreach($pweeps as $pweep)

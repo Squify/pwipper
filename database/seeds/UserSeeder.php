@@ -12,10 +12,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = [
-            'name' => 'Pauline GOULEY',
+            'name' => 'Username',
             'email' => 'user@mail.fr',
             'password' => 'test',
-            'pseudo' => 'paulette78',
+            'pseudo' => 'pseudo',
             'description' => 'blablabla',
             'image_path' => null,
             'banner_path' => null,

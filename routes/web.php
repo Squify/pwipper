@@ -13,5 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
 Route::get('/', 'PweepController@index')->name('homepage');
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->route('homepage');
+});
+Route::get('/profile', 'Auth\ProfileController@index')->name('profile')->middleware('auth');;
+Route::get('/update-profile', 'Auth\UpdateProfileController@index')->name('updateProfile')->middleware('auth');;
+Route::post('/update-profile', 'Auth\UpdateProfileController@updateProfile')->name('updateProfile')->middleware('auth');;
+
 Route::get('/{id}', 'PweepController@remove')->name('deletePweep');
+
