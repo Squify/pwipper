@@ -36,9 +36,7 @@
                 </form>
             </div>
         </div>
-        <div class="divider-section grey-thin-border">
-
-        </div>
+        <div class="divider-section grey-thin-border"></div>
         <div class="pweep-list grey-thin-border">
             @foreach($pweeps as $pweep)
                 <div class="pweep grey-thin-border">
@@ -68,15 +66,15 @@
                                     </svg>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <!-- Button Modal edit -->
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modalEdit" href="#">Editer</button>
+                                        <a type="button" class="dropdown-item" data-toggle="modal" data-target="#modalEdit" href="#">Editer</a>
                                         <!-- Button Modal remove -->
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modalRemove" href="#">Supprimer</button>
+                                        <a type="button" class="dropdown-item" data-toggle="modal" data-target="#modalRemove" href="#">Supprimer</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#">Signaler</a>
                                     </div>
+                                    @include('components.modal.edit')
+                                    @include('components.modal.remove')
                                 </a>
-                                @include('components.modal.edit')
-                                @include('components.modal.remove')
                             </div>
                         </div>
                         <p>{{ $pweep->message }}</p>
