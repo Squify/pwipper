@@ -19,4 +19,5 @@ Route::get('/', 'PweepController@index')->name('homepage');
  * Route Pweeps
  */
 Route::get('/{id}', 'PweepController@remove')->name('deletePweep');
-Route::post('/', 'PweepController@store')->name('storePweep');
+Route::post('/', 'PweepController@add')->name('addPweep');
+Route::post('/{id}', 'PweepController@update')->name('updatePweep');

@@ -34,29 +34,22 @@ class PweepController
         $pweep
             ->where('id', $id)
             ->update(['is_deleted' => true]);
-        return back();
+        return redirect()->route('homepage');
     }
 
     /**
      * Add pweep
      */
-    public function store(StorePweepRequest $request)
+    public function add(StorePweepRequest $request)
     {
         $params = $request->validated();
-
-        /* wtf
-        $pweep = Pweep::findOrFail($id);
         $test = Pweep::create($params)
-            ->where('id', $id)
             ->update([
                 'is_deleted' => false,
                 'author_id' => 1,
                 'updated_at' => null,
             ]);
         Pweep::create($test);
-        */
-
-        Pweep::create($params);
         return back();
     }
 
@@ -74,9 +67,7 @@ class PweepController
                 'author_id' => 1,
                 'updated_at' => null,
         ]);
-
-        $params = $request->validated();
         $pweep->update($params);
-        return back();
+        return redirect()->route('homepage');
     }
 }

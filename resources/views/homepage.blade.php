@@ -10,10 +10,10 @@
                 </picture>
             </div>
             <div class="col-10">
-                <form action="{{route('storePweep')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('addPweep')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <textarea placeholder="Quoi de neuf docteur ?" name="message" type="text"class="form-control"></textarea>
+                        <textarea placeholder="Quoi d'neuf docteur ?" name="message" type="text"class="form-control"></textarea>
                     </div>
                     <hr color="#38444D">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -65,15 +65,11 @@
                                         <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
                                     </svg>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <!-- Button Modal edit -->
-                                        <a type="button" class="dropdown-item" data-toggle="modal" data-target="#modalEdit" href="#">Editer</a>
-                                        <!-- Button Modal remove -->
-                                        <a type="button" class="dropdown-item" data-toggle="modal" data-target="#modalRemove" href="#">Supprimer</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Signaler</a>
+                                        <a type="button" class="dropdown-item" data-toggle="modal"  href="#updatePweep{{$pweep->id}}">Editer</a>
+                                        <a type="button" class="dropdown-item" data-toggle="modal" href="#deletePweep{{$pweep->id}}"> Supprimer</a>
                                     </div>
-                                    @include('components.modal.edit')
-                                    @include('components.modal.remove')
+                                    @include('components.modal.edit', ['pweep' => $pweep])
+                                    @include('components.modal.remove', ['pweep' => $pweep])
                                 </a>
                             </div>
                         </div>
