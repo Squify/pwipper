@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Pweep;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\UpdatePweepRequest;
@@ -40,16 +41,16 @@ class PweepController
     /**
      * Add pweep
      */
-    public function add(StorePweepRequest $request)
+    public function store(StorePweepRequest $request)
     {
-        $params = $request->validated();
-        $test = Pweep::create($params)
-            ->update([
-                'is_deleted' => false,
-                'author_id' => 1,
-                'updated_at' => null,
-            ]);
-        Pweep::create($test);
+        $data = $request->input();
+        DB::table('pweeps')->insert([
+            'message' => $data['message'],
+            'is_deleted' => false,
+            'author_id' => 1,
+            'created_at' => now(),
+            'updated_at' => null,
+        ]);
         return back();
     }
 
@@ -58,8 +59,10 @@ class PweepController
      */
     public function update(UpdatePweepRequest $request, $id)
     {
-        $params = $request->validated();
-        $pweep = Pweep::findOrFail($id);
+
+        $data = $request->input();
+
+        /*
         $pweep
             ->where('id', $id)
             ->update([
@@ -68,6 +71,14 @@ class PweepController
                 'updated_at' => null,
         ]);
         $pweep->update($params);
+        return redirect()->route('homepage');*/
+
+        DB::table('pweeps') 
+        ->where('id', $id)
+        ->update([
+            'message' => $data['message'],
+            'updated_at' => now(),
+        ]);
         return redirect()->route('homepage');
     }
 }

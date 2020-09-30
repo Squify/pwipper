@@ -1,4 +1,5 @@
 <form action="{{route('updatePweep', $pweep->id)}}" method="POST">
+    {{ csrf_field() }}
     <div class="modal fade" id="updatePweep{{$pweep->id}}" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -14,7 +14,7 @@
                         Ce Pweep sera supprimé de votre profil, du fil des comptes qui
                         vous suivent et des résultats de recherche Pwipper.</b>
                     </label>
-                    <label><u>Le pweep en question </u> : {{$pweep->message}}</label>
+                    <label><u>Le pweep en question</u> : {{$pweep->message}}</label>
                 </div>
             </div>
             <div class="modal-footer">

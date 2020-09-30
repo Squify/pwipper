@@ -52,6 +52,10 @@ body {
   color: #ffffff;
 }
 
+.main-container .image-upload > input {
+  display: none;
+}
+
 .main-container .divider-section {
   height: 10px;
   background-color: #253341;

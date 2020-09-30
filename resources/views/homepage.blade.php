@@ -10,15 +10,15 @@
                 </picture>
             </div>
             <div class="col-10">
-                <form action="{{route('addPweep')}}" method="post" enctype="multipart/form-data">
-                    @csrf
+                <form action="{{route('storePweep')}}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <textarea placeholder="Quoi d'neuf docteur ?" name="message" type="text"class="form-control"></textarea>
                     </div>
                     <hr color="#38444D">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div class="buttons">
-                            <a href="#" type="file" name="image" accept="image/png">
+                        <div class="image-upload">
+                            <label for="file-input">
                                 <svg  width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor"
                                     xmlns="http://www.w3.org/2000/svg" >
                                     <path fill-rule="evenodd"
@@ -26,13 +26,14 @@
                                     <path fill-rule="evenodd"
                                         d="M4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
                                 </svg>
-                            </a>
+                            </label>
+                            <input id="file-input" name="fileToUpload" type="file" />
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">Pweeper</button>
-                            @include('components.errors')
                         </div>
                     </div>
+                    @include('components.errors')
                 </form>
             </div>
         </div>
