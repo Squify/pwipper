@@ -82,17 +82,20 @@
         </div>
     </div>
     <script>
+        var compteur = 0;
         function previewImages() {
             var preview = document.querySelector('#preview');
-            var compteur = 0;
-            if (this.files) {
+            if(this.files) {
                 [].forEach.call(this.files, readAndPreview);
             }
             function readAndPreview(file) {
-                // Make sure `file.name` matches our extensions criteria
-                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                    return alert(file.name + " is not an image");
-                } // else...
+                if(!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    return alert(file.name + " is not an image / trop d'images");
+                }
+                else if(compteur > 3) {
+                    return alert("Maximum 4 images");
+                }
+                else {
                 var reader = new FileReader();
                 reader.addEventListener("load", function() {
                     var image = new Image();
@@ -103,7 +106,9 @@
                     preview.appendChild(image);
                 });
                 reader.readAsDataURL(file);
+                }
             }
+            compteur ++;
         }
         document.querySelector('#file-input').addEventListener("change", previewImages);
     </script>
