@@ -4,7 +4,7 @@
 <div class="register-container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card form-card">
                 <div class="card-header">Créer un compte</div>
 
                 <div class="card-body">

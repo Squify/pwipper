@@ -6,6 +6,7 @@
   position: fixed;
   width: 100%;
   z-index: 999999;
+  height: 75px;
 }
 
 .search-bar {
@@ -56,7 +57,7 @@ body {
 }
 
 .base-container {
-  padding-top: 55px;
+  padding-top: 74px;
 }
 
 #navbarToggler a {
@@ -106,16 +107,55 @@ body {
   border: unset;
 }
 
-.card {
+.form-card {
   background-color: #35495B;
   border: #35495B;
+  margin-top: 5%;
 }
 
-.card .card-header {
+.form-card .card-header {
   background-color: #253341;
 }
 
-.card .btn-submit {
+.form-card .btn-submit {
   background-color: #1B7CB8;
+}
+
+.profile-container p {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
+.profile-container .nav-tabs {
+  border: unset;
+}
+
+.profile-container .nav-tabs .nav-item {
+  padding: 0;
+  border: unset;
+}
+
+.profile-container .nav-tabs .nav-item a {
+  color: #8393A1;
+}
+
+.profile-container .nav-tabs .nav-item :hover {
+  background-color: #162D40;
+  color: #1DA1F2;
+  border: unset;
+}
+
+.profile-container .nav-tabs .nav-item .active {
+  color: #1DA1F2;
+  font-weight: bold;
+  border-bottom: 3px solid #1DA1F2;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  background: unset;
+  border: unset;
 }
 
