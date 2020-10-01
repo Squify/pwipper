@@ -13,6 +13,7 @@ use App\Http\Requests\UpdatePweepRequest;
 
 class PweepController
 {
+    
     /**
      * View of home with all posts
      * @return \Illuminate\Contracts\View\Factory\Illuminate\View\View
@@ -59,26 +60,13 @@ class PweepController
      */
     public function update(UpdatePweepRequest $request, $id)
     {
-
         $data = $request->input();
-
-        /*
-        $pweep
+        DB::table('pweeps')
             ->where('id', $id)
             ->update([
-                'is_deleted' => false,
-                'author_id' => 1,
-                'updated_at' => null,
-        ]);
-        $pweep->update($params);
-        return redirect()->route('homepage');*/
-
-        DB::table('pweeps') 
-        ->where('id', $id)
-        ->update([
-            'message' => $data['message'],
-            'updated_at' => now(),
-        ]);
+                'message' => $data['message'],
+                'updated_at' => now(),
+            ]);
         return redirect()->route('homepage');
     }
 }

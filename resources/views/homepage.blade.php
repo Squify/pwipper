@@ -18,7 +18,7 @@
                     <hr color="#38444D">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
                         <div class="image-upload">
-                            <label for="file-input">
+                            <label for="file-input" style="cursor: pointer;">
                                 <svg  width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor"
                                     xmlns="http://www.w3.org/2000/svg" >
                                     <path fill-rule="evenodd"
@@ -27,7 +27,8 @@
                                         d="M4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
                                 </svg>
                             </label>
-                            <input id="file-input" name="fileToUpload" type="file" />
+                            <input id="file-input" name="img" type="file" multiple/>
+                            <div id="preview"></div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary">Pweeper</button>
@@ -80,4 +81,31 @@
             @endforeach
         </div>
     </div>
+    <script>
+        function previewImages() {
+            var preview = document.querySelector('#preview');
+            var compteur = 0;
+            if (this.files) {
+                [].forEach.call(this.files, readAndPreview);
+            }
+            function readAndPreview(file) {
+                // Make sure `file.name` matches our extensions criteria
+                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    return alert(file.name + " is not an image");
+                } // else...
+                var reader = new FileReader();
+                reader.addEventListener("load", function() {
+                    var image = new Image();
+                    image.height = 130;
+                    image.width = 195;
+                    image.title  = file.name;
+                    image.src    = this.result;
+                    preview.appendChild(image);
+                });
+                reader.readAsDataURL(file);
+            }
+        }
+        document.querySelector('#file-input').addEventListener("change", previewImages);
+    </script>
 @endsection
+
