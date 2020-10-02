@@ -45,7 +45,23 @@ class PweepController
     public function store(StorePweepRequest $request)
     {
         $data = $request->input();
-        DB::table('pweeps')->insert([
+        foreach($request->file('images') as $image) {
+            if(!empty($image)) {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/img/', $name);
+                $listImage[] = $name;
+            }
+        }
+        for ($i = 0; $i < 4; $i++) {
+            if(empty($listImage[$i])){
+                $listImage[$i] = null;
+            }
+        }
+        Pweep::insert([
+            'image_path_1' => $listImage[0],
+            'image_path_2' => $listImage[1],
+            'image_path_3' => $listImage[2],
+            'image_path_4' => $listImage[3],
             'message' => $data['message'],
             'is_deleted' => false,
             'author_id' => 1,
