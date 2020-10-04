@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\UpdatePweepRequest;
 use App\Pweep;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PweepController
@@ -42,15 +43,17 @@ class PweepController
     public function store(StorePweepRequest $request)
     {
         $data = $request->input();
-        foreach($request->file('images') as $image) {
-            if(!empty($image)) {
-                $name= $image->getClientOriginalName();
-                $image->move(public_path().'/img/pweep/', $name);
-                $listImage[] = $name;
+        if ($request->file('images')) {
+            foreach ($request->file('images') as $image) {
+                if (!empty($image)) {
+                    $name = $image->getClientOriginalName();
+                    $image->move(public_path() . '/img/pweep/', $name);
+                    $listImage[] = $name;
+                }
             }
         }
         for ($i = 0; $i < 4; $i++) {
-            if(empty($listImage[$i])){
+            if (empty($listImage[$i])) {
                 $listImage[$i] = null;
             }
         }
@@ -61,7 +64,7 @@ class PweepController
             'image_path_4' => $listImage[3] ? 'pweep/' . $listImage[3] : null,
             'message' => $data['message'],
             'is_deleted' => false,
-            'author_id' => 1,
+            'author_id' => Auth::id(),
             'created_at' => now(),
             'updated_at' => null,
         ]);

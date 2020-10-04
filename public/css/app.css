@@ -134,6 +134,8 @@ body {
   width: 3em;
   background-color: transparent;
   border: unset;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .form-card {
@@ -182,5 +184,22 @@ body {
 .nav-tabs .nav-link.active {
   background: unset;
   border: unset;
+}
+
+.profile-pic-container {
+  height: 142px;
+  width: 142px;
+  position: relative;
+  top: -80px;
+  margin-bottom: -75px;
+}
+
+.profile-pic {
+  height: 142px;
+  width: 142px;
+  border: unset;
+  background: #15202B;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 

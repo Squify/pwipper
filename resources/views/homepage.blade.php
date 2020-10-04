@@ -5,13 +5,17 @@
         <div class="new-pweep grey-thin-border">
             <div class="col-2">
                 <picture>
-                    <img src="{{ asset('storage/img/pwipper_logo_light.png') }}"
-                         class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @if(Auth::user()->image_path)
+                        <img src="{{ asset('storage/' . Auth::user()->image_path) }}"
+                             class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @else
+                        <img src="{{ asset('storage/img/no_profile_pic.png') }}"
+                             class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @endif
                 </picture>
             </div>
+
             <div class="col-10">
-
-
                 <form action="{{ route('storePweep') }}" id="img" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -40,8 +44,6 @@
                     </div>
                     @include('components.errors')
                 </form>
-
-
             </div>
         </div>
         <div class="divider-section grey-thin-border"></div>

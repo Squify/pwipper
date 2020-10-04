@@ -8,7 +8,7 @@
                     <div class="card-header">Modifier le compte</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('updateProfile') }}">
+                        <form method="POST" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -43,7 +43,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
 
                                 <div class="col-md-6">
-                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $user->description }}" autocomplete="description">
+                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $user->description }}" placeholder="Saisir ici votre description (facultatif)" autocomplete="description">
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
 
                                 <div class="col-md-6">
                                     <input id="image_path" type="file" name="image_path" class="form-control-file" value="{{ old('image_path') }}"
-                                           accept="image/png">
+                                           accept="image/*">
                                     @error('image_path')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -72,7 +72,7 @@
 
                                 <div class="col-md-6">
                                     <input id="banner_path" type="file" name="banner_path" class="form-control-file" value="{{ old('banner_path') }}"
-                                           accept="image/png">
+                                           accept="image/*">
                                     @error('banner_path')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -85,7 +85,7 @@
                                 <label for="location" class="col-md-4 col-form-label text-md-right">Localisation</label>
 
                                 <div class="col-md-6">
-                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ $user->location }}" autocomplete="location">
+                                    <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ $user->location }}" placeholder="Saisir ici votre localisation (facultatif)" autocomplete="location">
 
                                     @error('location')
                                     <span class="invalid-feedback" role="alert">
@@ -99,7 +99,7 @@
                                 <label for="website" class="col-md-4 col-form-label text-md-right">Site web</label>
 
                                 <div class="col-md-6">
-                                    <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ $user->website }}" autocomplete="website">
+                                    <input id="website" type="text" class="form-control @error('website') is-invalid @enderror" name="website" value="{{ $user->website }}" placeholder="Saisir ici votre site internet (facultatif)" autocomplete="website">
 
                                     @error('website')
                                     <span class="invalid-feedback" role="alert">

@@ -10,13 +10,13 @@
             @endif
 
             <div style="padding-left: 18px">
-                <div style="height: 142px; width: 142px; position: relative; top: -80px; margin-bottom: -75px;">
-                    @if($user->banner_path)
-                        <img src="{{ asset('storage/' . $user->banner_path) }}"
-                             class="img-fluid rounded-circle img-thumbnail" style="background: #15202B; border: unset">
+                <div class="profile-pic-container">
+                    @if($user->image_path)
+                        <img src="{{ asset('storage/' . $user->image_path) }}"
+                             class="img-fluid rounded-circle img-thumbnail profile-pic">
                     @else
                         <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                             class="img-fluid rounded-circle img-thumbnail" style="background: #15202B; border: unset">
+                             class="img-fluid rounded-circle img-thumbnail profile-pic">
                     @endif
                 </div>
                 <p>
