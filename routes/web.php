@@ -24,4 +24,6 @@ Route::get('/update-profile', 'Auth\UpdateProfileController@index')->name('updat
 Route::post('/update-profile', 'Auth\UpdateProfileController@updateProfile')->name('updateProfile')->middleware('auth');;
 
 Route::get('/{id}', 'PweepController@remove')->name('deletePweep');
+Route::post('/', 'PweepController@store')->name('storePweep');
+Route::post('/{id}', 'PweepController@update')->name('updatePweep');
 

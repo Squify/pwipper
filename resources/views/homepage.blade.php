@@ -10,32 +10,33 @@
                 </picture>
             </div>
             <div class="col-10">
-                <div class="form-group">
-                    <textarea placeholder="Quoi de neuf docteur ?" name="message" type="text"
-                              class="form-control"></textarea>
-                </div>
-                <hr color="#38444D">
-                <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <div class="buttons">
-                        <a href="#">
-                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M12.002 4h-10a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10zm4 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                <path fill-rule="evenodd"
-                                      d="M4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
-                            </svg>
-                        </a>
+                <form action="{{route('storePweep')}}" id="img" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <textarea placeholder="Quoi d'neuf docteur ?" name="message" type="text"class="form-control"></textarea>
                     </div>
-                    <div>
-                        <button type="button" class="btn btn-primary">Pweeper</button>
+                    <hr color="#38444D">
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div class="image-upload">
+                            <label for="image_path" style="cursor: pointer;">
+                                <svg  width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-images" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg" >
+                                    <path fill-rule="evenodd" d="M12.002 4h-10a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1zm-10-1a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-10zm4 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                    <path fill-rule="evenodd" d="M4 2h10a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1v1a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2h1a1 1 0 0 1 1-1z"/>
+                                </svg>
+                            </label>
+                            <input id="image_path" name="images[]" type="file" multiple/>
+                            <div id="preview"></div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Pweeper</button>
+                        </div>
                     </div>
-                </div>
+                    @include('components.errors')
+                </form>
             </div>
         </div>
-        <div class="divider-section grey-thin-border">
-
-        </div>
+        <div class="divider-section grey-thin-border"></div>
         <div class="pweep-list grey-thin-border">
             @foreach($pweeps as $pweep)
                 <div class="pweep grey-thin-border">
@@ -64,20 +65,62 @@
                                         <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
                                     </svg>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Editer</a>
-                                        <!-- Bootstrap modal améliorer -->
-                                        <a class="dropdown-item" href="{{route('deletePweep', $pweep->id)}}">Supprimer</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Signaler</a>
+                                        <a type="button" class="dropdown-item" data-toggle="modal"  href="#updatePweep{{$pweep->id}}">Editer</a>
+                                        <a type="button" class="dropdown-item" data-toggle="modal" href="#deletePweep{{$pweep->id}}"> Supprimer</a>
                                     </div>
+                                    @include('components.modal.edit', ['pweep' => $pweep])
+                                    @include('components.modal.remove', ['pweep' => $pweep])
                                 </a>
-                                
                             </div>
                         </div>
-                        <p>{{ $pweep->message }}</p>
+                        <p>{{ $pweep->message}}</p>
+                        @if($pweep->image_path_1)
+                            <img src="{{ asset('img/' . $pweep->image_path_1) }}" width="195px" height="130px"/>
+                        @endif
+                        @if($pweep->image_path_2)
+                            <img src="{{ asset('img/' . $pweep->image_path_2) }}" width="195px" height="130px"/>
+                        @endif
+                        @if($pweep->image_path_3)
+                            <img src="{{ asset('img/' . $pweep->image_path_3) }}" width="195px" height="130px"/>
+                        @endif
+                        @if($pweep->image_path_4)
+                            <img src="{{ asset('img/' . $pweep->image_path_4) }}" width="195px" height="130px"/>
+                        @endif
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
+    <script>
+        var compteur = 0;
+        function previewImages() {
+            var preview = document.querySelector('#preview');
+            if(this.files) {
+                [].forEach.call(this.files, readAndPreview);
+            }
+            function readAndPreview(file) {
+                if(!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    return alert(file.name + " n'est pas une image ou un gif");
+                }
+                else if(compteur > 3) {
+                    return alert("Maximum 4 images");
+                }
+                else {
+                var reader = new FileReader();
+                reader.addEventListener("load", function() {
+                    var image = new Image();
+                    image.height = 130;
+                    image.width = 195;
+                    image.title  = file.name;
+                    image.src    = this.result;
+                    preview.appendChild(image);
+                });
+                reader.readAsDataURL(file);
+                }
+            }
+            compteur ++;
+        }
+        document.querySelector('#image_path').addEventListener("change", previewImages);
+    </script>
 @endsection
+
