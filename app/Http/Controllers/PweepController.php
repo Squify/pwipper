@@ -3,17 +3,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Pweep;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\UpdatePweepRequest;
+use App\Pweep;
+use Illuminate\Support\Facades\DB;
 
 class PweepController
 {
-    
+
     /**
      * View of home with all posts
      * @return \Illuminate\Contracts\View\Factory\Illuminate\View\View
@@ -47,8 +44,8 @@ class PweepController
         $data = $request->input();
         foreach($request->file('images') as $image) {
             if(!empty($image)) {
-                $name=$image->getClientOriginalName();
-                $image->move(public_path().'/img/', $name);
+                $name= $image->getClientOriginalName();
+                $image->move(public_path().'/img/pweep/', $name);
                 $listImage[] = $name;
             }
         }
@@ -58,10 +55,10 @@ class PweepController
             }
         }
         Pweep::insert([
-            'image_path_1' => $listImage[0],
-            'image_path_2' => $listImage[1],
-            'image_path_3' => $listImage[2],
-            'image_path_4' => $listImage[3],
+            'image_path_1' => $listImage[0] ? 'pweep/' . $listImage[0] : null,
+            'image_path_2' => $listImage[1] ? 'pweep/' . $listImage[1] : null,
+            'image_path_3' => $listImage[2] ? 'pweep/' . $listImage[2] : null,
+            'image_path_4' => $listImage[3] ? 'pweep/' . $listImage[3] : null,
             'message' => $data['message'],
             'is_deleted' => false,
             'author_id' => 1,

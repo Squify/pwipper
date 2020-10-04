@@ -19,7 +19,11 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $pweeps = Pweep::where('author_id', $user->id)->orderBy('created_at', 'DESC')->get();
-        $medias = Pweep::whereNotNull('image_path_1')->orderBy('created_at', 'DESC')->get();
+        $medias =
+            Pweep::whereNotNull('image_path_1')
+                ->where('author_id', $user->id)
+                ->orderBy('created_at', 'DESC')
+                ->get();
         return view('auth/profile')->with([
             'user' => $user,
             'pweeps' => $pweeps,
