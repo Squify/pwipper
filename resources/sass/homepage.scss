@@ -7,11 +7,17 @@
         padding-bottom: 15px;
         display: flex;
         flex-direction: row;
+
         textarea {
             min-height: 75px;
             background-color: transparent;
             border-color: transparent;
+            color: #ffffff;
         }
+    }
+
+    .image-upload > input {
+        display: none;
     }
 
     .divider-section {
@@ -26,6 +32,23 @@
             padding-top: 15px;
             padding-bottom: 15px;
         }
+
+        .dropdown {
+            color: white;
+
+            .dropdown-menu {
+                background: #253341;
+
+                a {
+                    color: white;
+                }
+
+                :hover {
+                    background: #35495B;
+                    border-color: #35495B;
+                }
+            }
+        }
     }
 }
 
@@ -36,8 +59,9 @@
 }
 
 .profile_pic {
-    height: 65px;
-    width: 65px;
+    height: 3em;
+    width: 3em;
     background-color: transparent;
     border: unset;
+    object-fit: cover;
 }

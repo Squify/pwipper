@@ -12,11 +12,11 @@ class PweepSeeder extends Seeder
     public function run()
     {
         $pweeps = [
-            ['Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
-            ['Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
-            ['Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
-            ['Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
-            ['Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
+            ['UN Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
+            ['DEUX Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
+            ['TROIS Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
+            ['QUATRE Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
+            ['CINQ Lorem ipsum dolor sit amet, consectetur adipisicing elit. A eius eligendi eveniet ipsa, ipsum maiores maxime odio officiis, optio possimus quisquam voluptate! Aliquam at atque commodi minus nisi qui sunt?', null,  null,  null,  null, false, null, 1],
         ];
 
         foreach ($pweeps as $pweep) {

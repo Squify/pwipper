@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg ">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('homepage') }}">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door-fill" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -53,15 +53,59 @@
         </div>
 
         <div class="search-bar">
+            @if(Auth::check())
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <picture>
+                                    @if(Auth::user()->image_path)
+                                        <img src="{{ asset('storage/' . Auth::user()->image_path) }}"
+                                             class="profile_pic img-fluid rounded-circle img-thumbnail">
+                                    @else
+                                        <img src="{{ asset('storage/img/no_profile_pic.png') }}"
+                                             class="profile_pic img-fluid rounded-circle img-thumbnail">
+                                    @endif
+                                </picture>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('profile') }}">Mon compte</a>
+                                <a class="dropdown-item" href="{{ route('updateProfile') }}">Modifier mon compte</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ url('/logout') }}">Déconnexion</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pas connecté ?
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('login') }}">Connexion</a>
+                                <a class="dropdown-item" href="{{ route('register') }}">Créer un compte</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            @endif
             <form class="form-inline">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search"
                            aria-describedby="basic-addon1">
                     <div class="input-group-prepend">
                         <span class="input-group-text search-button" id="basic-addon1">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                            <path fill-rule="evenodd"
+                                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                         </svg>
                         </span>
                     </div>
