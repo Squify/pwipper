@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="divider-section grey-thin-border"></div>
-        <div class="pweep-list grey-thin-border">
+        <div class="pweep-list">
             @foreach($pweeps as $pweep)
                 <div class="pweep grey-thin-border">
                     <div class="col-2">
@@ -56,21 +56,23 @@
                             <div class="left">
                                 <p style="display: flex; flex-direction: row; justify-content: space-around;">
                                     <b>{{ $pweep->author->name . ' _'}}</b>{{' @' . $pweep->author->pseudo }} ·
-                                    <small>{{ $pweep->created_at->format('H:m') }}</small> 
+                                    <small>{{ $pweep->created_at->format('H:m') }}</small>
                                 </p>
                             </div>
                             <div class="right">
-                                <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <svg style="overflow: auto scroll;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
-                                    </svg>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a type="button" class="dropdown-item" data-toggle="modal"  href="#updatePweep{{$pweep->id}}">Editer</a>
-                                        <a type="button" class="dropdown-item" data-toggle="modal" href="#deletePweep{{$pweep->id}}"> Supprimer</a>
+                                <div class="dropdown">
+                                    <button style="color: white" class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" data-toggle="modal" href="#updatePweep{{$pweep->id}}">Éditer</a>
+                                        <a class="dropdown-item" data-toggle="modal" href="#deletePweep{{$pweep->id}}">Supprimer</a>
                                     </div>
                                     @include('components.modal.edit', ['pweep' => $pweep])
                                     @include('components.modal.remove', ['pweep' => $pweep])
-                                </a>
+                                </div>
                             </div>
                         </div>
                         <p>{{ $pweep->message}}</p>

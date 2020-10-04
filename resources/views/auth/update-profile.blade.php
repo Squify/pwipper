@@ -126,12 +126,18 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-submit">
+                                    <button type="submit" class="btn btn-primary">
                                         Enregistrer
                                     </button>
                                 </div>
                             </div>
                         </form>
+
+                        <div class="form-group row mb-0" style="margin-top: 15px">
+                            <div class="col-md-6 offset-md-4">
+                                <a type="button" class="btn btn-danger" href="{{ route('deleteProfile') }}">Supprimer mon compte</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

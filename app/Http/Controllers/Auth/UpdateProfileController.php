@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
+use App\Pweep;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -54,5 +55,26 @@ class UpdateProfileController extends Controller
 
         $user->update($params);
         return redirect()->route('profile');
+    }
+
+    /**
+     * Delete user from database and set his pweeps as deleted
+     */
+    public function remove()
+    {
+        $user = User::findOrFail(Auth::id());
+        $pweeps = Pweep::where('author_id', $user->id)->get();
+        foreach ($pweeps as $pweep) {
+            $pweep->is_deleted = true;
+            $pweep->update();
+        }
+
+        if ($user->image_path)
+        Storage::delete('public/' . $user->image_path);
+        if ($user->banner_path)
+        Storage::delete('public/' . $user->banner_path);
+
+        $user->delete();
+        return back();
     }
 }

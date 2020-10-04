@@ -16,7 +16,7 @@
         }
     }
 
-    .image-upload>input {
+    .image-upload > input {
         display: none;
     }
 
@@ -31,6 +31,23 @@
             flex-direction: row;
             padding-top: 15px;
             padding-bottom: 15px;
+        }
+
+        .dropdown {
+            color: white;
+
+            .dropdown-menu {
+                background: #253341;
+
+                a {
+                    color: white;
+                }
+
+                :hover {
+                    background: #35495B;
+                    border-color: #35495B;
+                }
+            }
         }
     }
 }
