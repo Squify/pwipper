@@ -150,6 +150,11 @@
                         </div>
                     </div>
                 @endforeach
+                @if(!$medias)
+                <div class="pweep grey-thin-border">
+                    <p>Aucun pweep avec image pour le moment</p>
+                </div>
+                @endif
             </div>
             <div class="tab-pane pweep-list" id="like" role="tabpanel" aria-labelledby="like-tab">
                 <div class="pweep grey-thin-border">
