@@ -18,12 +18,17 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::findOrFail(Auth::id());
-        $pweeps = Pweep::where('author_id', $user->id)->orderBy('created_at', 'DESC')->get();
-        $medias =
-            Pweep::whereNotNull('image_path_1')
-                ->where('author_id', $user->id)
-                ->orderBy('created_at', 'DESC')
-                ->get();
+        $pweeps = Pweep::where('author_id', $user->id)
+            ->orderBy('created_at', 'DESC')
+            ->where(['is_deleted' => false])
+            ->get()
+            ->all();
+        $medias = Pweep::whereNotNull('image_path_1')
+            ->where('author_id', $user->id)
+            ->orderBy('created_at', 'DESC')
+            ->where(['is_deleted' => false])
+            ->get()
+            ->all();
         return view('auth/profile')->with([
             'user' => $user,
             'pweeps' => $pweeps,

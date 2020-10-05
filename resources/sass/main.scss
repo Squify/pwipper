@@ -12,6 +12,11 @@ $light-gray: #d3d5d7ff;
     width: 100%;
     z-index: 999999;
     height: 75px;
+
+    .nav-link:hover {
+        text-decoration: underline;
+        color: white;
+    }
 }
 
 .search-bar {

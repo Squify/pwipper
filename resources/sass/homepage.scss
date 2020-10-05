@@ -58,9 +58,17 @@
     border-top: 1px solid #38444D;
 }
 
-.profile_pic {
+.profile_pic_nav {
     height: 3em;
     width: 3em;
+    background-color: transparent;
+    border: unset;
+    object-fit: cover;
+}
+
+.profile_pic {
+    height: 5em;
+    width: 5em;
     background-color: transparent;
     border: unset;
     object-fit: cover;

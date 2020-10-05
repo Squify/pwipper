@@ -30,11 +30,9 @@ class PweepController
      */
     public function remove($id)
     {
-        $pweep = Pweep::findOrFail($id);
-        $pweep
-            ->where('id', $id)
+        Pweep::where('id', $id)
             ->update(['is_deleted' => true]);
-        return redirect()->route('homepage');
+        return back();
     }
 
     /**
@@ -77,12 +75,11 @@ class PweepController
     public function update(UpdatePweepRequest $request, $id)
     {
         $data = $request->input();
-        DB::table('pweeps')
-            ->where('id', $id)
+        Pweep::where('id', $id)
             ->update([
                 'message' => $data['message'],
                 'updated_at' => now(),
             ]);
-        return redirect()->route('homepage');
+        return back();
     }
 }

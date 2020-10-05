@@ -62,10 +62,10 @@
                                 <picture>
                                     @if(Auth::user()->image_path)
                                         <img src="{{ asset('storage/' . Auth::user()->image_path) }}"
-                                             class="profile_pic img-fluid rounded-circle img-thumbnail">
+                                             class="profile_pic_nav img-fluid rounded-circle img-thumbnail">
                                     @else
                                         <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                                             class="profile_pic img-fluid rounded-circle img-thumbnail">
+                                             class="profile_pic_nav img-fluid rounded-circle img-thumbnail">
                                     @endif
                                 </picture>
                             </a>

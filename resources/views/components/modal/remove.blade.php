@@ -20,9 +20,17 @@
                             Il n'est pas possible d'annuler cette opération. <br>
                             Ce Pweep sera supprimé définitivement du fil d'actualité, de votre profil, et des résultats
                             de recherche Pwipper.</b>
-                    </label><br>
+                    </label><br><br>
                     <label><u>Le pweep en question</u> : <br>
-                        {{ $pweep->message }}</label>
+                        {{ $pweep->message }}
+                    </label><br>
+                    @if($pweep->image_path_2 === null)
+                        <label> <u>Image</u> : <br>
+                    @else
+                        <label> <u>Images</u> : <br>
+                    @endif
+                        @include('components.img.pweep', ['pweep' => $pweep])
+                    </label>
                 </div>
             </div>
             <div class="modal-footer">

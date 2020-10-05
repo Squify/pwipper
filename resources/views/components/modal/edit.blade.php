@@ -6,8 +6,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditLabel">Éditer mon pweep
-                        n°{{ $pweep->id }}</h5>
+                    <h5 class="modal-title" id="modalEditLabel">Éditer mon pweep</h5>
                     <button style="color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">

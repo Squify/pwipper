@@ -69,7 +69,7 @@
                 </p>
             </div>
 
-            <ul style="margin-top: 10px" class="nav nav-tabs col-12" id="myTab" role="tablist">
+            <ul style="margin-top: 10px; text-align: center;" class="nav nav-tabs col-12" id="myTab" role="tablist">
                 <li class="nav-item col-4">
                     <a class="nav-link active" id="pweep-tab" data-toggle="tab" href="#pweep" aria-controls="pweep"
                        aria-selected="true">Pweeps</a>
@@ -108,41 +108,18 @@
                                         <small>{{ $pweep->created_at->format('H:m') }}</small>
                                     </p>
                                 </div>
-                                <div class="right">
-                                    <a href="#" class="nav-link" id="navbarDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg style="overflow: auto scroll;" width="1em" height="1em" viewBox="0 0 16 16"
-                                             class="bi bi-arrow-bar-down" fill="currentColor"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
-                                        </svg>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Editer</a>
-                                            <!-- Bootstrap modal améliorer -->
-                                            <a class="dropdown-item" href="{{route('deletePweep', $pweep->id)}}">Supprimer</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Signaler</a>
-                                        </div>
-                                    </a>
-                                </div>
+                                @include('components.modal.dropdown', ['pweep' => $pweep])
                             </div>
                             <p>{{ $pweep->message }}</p>
-                            @if($pweep->image_path_1)
-                                <img src="{{ asset('img/' . $pweep->image_path_1) }}" width="195px" height="130px"/>
-                            @endif
-                            @if($pweep->image_path_2)
-                                <img src="{{ asset('img/' . $pweep->image_path_2) }}" width="195px" height="130px"/>
-                            @endif
-                            @if($pweep->image_path_3)
-                                <img src="{{ asset('img/' . $pweep->image_path_3) }}" width="195px" height="130px"/>
-                            @endif
-                            @if($pweep->image_path_4)
-                                <img src="{{ asset('img/' . $pweep->image_path_4) }}" width="195px" height="130px"/>
-                            @endif
+                            @include('components.img.pweep', ['pweep' => $pweep])
                         </div>
                     </div>
                 @endforeach
+                @if(!$pweeps)
+                <div class="pweep grey-thin-border">
+                    <p>Aucun pweep pour le moment</p>
+                </div>
+                @endif
             </div>
             <div class="tab-pane pweep-list" id="media" role="tabpanel" aria-labelledby="media-tab">
                 @foreach($medias as $media)
@@ -166,45 +143,18 @@
                                         <small>{{ $media->created_at->format('H:m') }}</small>
                                     </p>
                                 </div>
-                                <div class="right">
-                                    <a href="#" class="nav-link" id="navbarDropdown" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg style="overflow: auto scroll;" width="1em" height="1em" viewBox="0 0 16 16"
-                                             class="bi bi-arrow-bar-down" fill="currentColor"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                  d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
-                                        </svg>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a type="button" class="dropdown-item" data-toggle="modal"
-                                               href="#updatePweep{{$media->id}}">Editer</a>
-                                            <a type="button" class="dropdown-item" data-toggle="modal"
-                                               href="#deletePweep{{$media->id}}"> Supprimer</a>
-                                        </div>
-                                        @include('components.modal.edit', ['pweep' => $media])
-                                        @include('components.modal.remove', ['pweep' => $media])
-                                    </a>
-                                </div>
+                                @include('components.modal.dropdown', ['pweep' => $media])
                             </div>
-                            <p>{{ $media->message}}</p>
-                            @if($media->image_path_1)
-                                <img src="{{ asset('img/' . $media->image_path_1) }}" width="195px" height="130px"/>
-                            @endif
-                            @if($media->image_path_2)
-                                <img src="{{ asset('img/' . $media->image_path_2) }}" width="195px" height="130px"/>
-                            @endif
-                            @if($media->image_path_3)
-                                <img src="{{ asset('img/' . $media->image_path_3) }}" width="195px" height="130px"/>
-                            @endif
-                            @if($media->image_path_4)
-                                <img src="{{ asset('img/' . $media->image_path_4) }}" width="195px" height="130px"/>
-                            @endif
+                            <p>{{ $media->message }}</p>
+                            @include('components.img.pweep', ['pweep' => $media])
                         </div>
                     </div>
                 @endforeach
             </div>
             <div class="tab-pane pweep-list" id="like" role="tabpanel" aria-labelledby="like-tab">
-                <h1>Récupérer les mentions j'aime et mettre la même boucle qu'en haut</h1>
+                <div class="pweep grey-thin-border">
+                    <h1>Récupérer les mentions j'aime et mettre la même boucle qu'en haut</h1>
+                </div>
             </div>
         </div>
     </div>

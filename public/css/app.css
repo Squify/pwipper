@@ -9,6 +9,11 @@
   height: 75px;
 }
 
+.navbar .nav-link:hover {
+  text-decoration: underline;
+  color: white;
+}
+
 .search-bar {
   display: flex;
   flex-direction: row;
@@ -129,9 +134,18 @@ body {
   border-top: 1px solid #38444D;
 }
 
-.profile_pic {
+.profile_pic_nav {
   height: 3em;
   width: 3em;
+  background-color: transparent;
+  border: unset;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.profile_pic {
+  height: 5em;
+  width: 5em;
   background-color: transparent;
   border: unset;
   -o-object-fit: cover;
