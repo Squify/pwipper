@@ -24,7 +24,9 @@
                     <label><u>Le pweep en question</u> : <br>
                         {{ $pweep->message }}
                     </label><br>
-                    @if($pweep->image_path_2 === null)
+                    @if($pweep->image_path_1 === null)
+                        <label> <u> Pas d'image</u>
+                    @elseif($pweep->image_path_2 === null)
                         <label> <u>Image</u> : <br>
                     @else
                         <label> <u>Images</u> : <br>

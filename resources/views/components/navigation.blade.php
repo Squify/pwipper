@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link"  href="{{ route('contact') }}">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -49,7 +49,9 @@
         </ul>
 
         <div class="brand">
-            <img style="width: 40px; height: 40px" src="{{ asset('storage/img/pwipper_logo_light.png') }}">
+            <a href="{{ route('homepage') }}">
+                <img style="width: 40px; height: 40px" src="{{ asset('storage/img/pwipper_logo_light.png') }}">
+            </a>
         </div>
 
         <div class="search-bar">
@@ -72,6 +74,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('profile') }}">Mon compte</a>
                                 <a class="dropdown-item" href="{{ route('updateProfile') }}">Modifier mon compte</a>
+                                <a class="dropdown-item" href="{{ route('contact') }}">Nous contacter</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">Déconnexion</a>
                             </div>
@@ -89,6 +92,8 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('login') }}">Connexion</a>
                                 <a class="dropdown-item" href="{{ route('register') }}">Créer un compte</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('contact') }}">Nous contacter</a>
                             </div>
                         </li>
                     </ul>
@@ -106,7 +111,7 @@
                                   d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                             <path fill-rule="evenodd"
                                   d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                        </svg>
+                            </svg>
                         </span>
                     </div>
                 </div>

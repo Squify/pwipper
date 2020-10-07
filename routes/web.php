@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,9 @@ Route::get('/profile', 'Auth\ProfileController@index')->name('profile')->middlew
 Route::get('/profile/update', 'Auth\UpdateProfileController@index')->name('updateProfile')->middleware('auth');
 Route::post('/profile/update', 'Auth\UpdateProfileController@updateProfile')->name('updateProfile')->middleware('auth');
 Route::get('/profile/remove', 'Auth\UpdateProfileController@remove')->name('deleteProfile')->middleware('auth');
+
+Route::get('/contact', 'ContactController@index')->name('contact');
+Route::post('/contact', 'ContactController@email')->name('sendMail');
 
 Route::get('/{id}', 'PweepController@remove')->name('deletePweep');
 Route::post('/', 'PweepController@store')->name('storePweep');

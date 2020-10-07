@@ -116,9 +116,9 @@
                     </div>
                 @endforeach
                 @if(!$pweeps)
-                <div class="pweep grey-thin-border">
-                    <p>Aucun pweep pour le moment</p>
-                </div>
+                    <div class="pweep grey-thin-border">
+                        <p>Aucun pweep pour le moment</p>
+                    </div>
                 @endif
             </div>
             <div class="tab-pane pweep-list" id="media" role="tabpanel" aria-labelledby="media-tab">
