@@ -82,6 +82,7 @@
                                 </button>
                             </div>
                         </div>
+                        <small>*un mail vous sera envoyé<small>
                     </form>
                 </div>
             </div>
