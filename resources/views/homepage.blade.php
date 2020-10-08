@@ -51,32 +51,7 @@
         @endif
         <div class="pweep-list">
             @foreach($pweeps as $pweep)
-                <div class="pweep grey-thin-border">
-                    <div class="col-2">
-                        <picture>
-                            @if($pweep->author->image_path)
-                                <img src="{{ asset('storage/' . $pweep->author->image_path) }}"
-                                     class="profile_pic img-fluid rounded-circle img-thumbnail">
-                            @else
-                                <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                                     class="profile_pic img-fluid rounded-circle img-thumbnail">
-                            @endif
-                        </picture>
-                    </div>
-                    <div class="col-10">
-                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                            <div class="left">
-                                <p style="display: flex; flex-direction: row; justify-content: space-around;">
-                                    <b>{{ $pweep->author->name . ' _'}}</b>{{' @' . $pweep->author->pseudo }} ·
-                                    <small>{{ $pweep->created_at->format('H:m') }}</small>
-                                </p>
-                            </div>
-                            @include('components.modal.dropdown', ['pweep' => $pweep])
-                        </div>
-                        <p>{{ $pweep->message}}</p>
-                        @include('components.img.pweep', ['pweep' => $pweep])
-                    </div>
-                </div>
+                @include('components.pweep', ['pweep' => $pweep, 'currentUser' => $user])
             @endforeach
         </div>
     </div>

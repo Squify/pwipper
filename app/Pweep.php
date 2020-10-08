@@ -14,11 +14,17 @@ class Pweep extends Model
         'image_path_3',
         'image_path_4',
         'is_deleted',
-        'initial_pweep_id'
+        'initial_pweep_id',
+        'initial_author_id'
     ];
     public function author()
     {
         return $this->hasOne('App\User', 'id', 'author_id');
+    }
+
+    public function initialAuthor()
+    {
+        return $this->hasOne('App\User', 'id', 'initial_author_id');
     }
 
     /**
@@ -42,5 +48,10 @@ class Pweep extends Model
     public function hashtags()
     {
         return $this->belongsToMany('App\Hashtag', 'pweeps_hashtags', 'hashtag_id', 'pweep_id');
+    }
+
+    public function users_like()
+    {
+        return $this->belongsToMany('App\User', 'like', 'pweep_id', 'user_id');
     }
 }

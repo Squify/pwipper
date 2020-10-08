@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\User;
 
 class UserSeeder extends Seeder
 {
@@ -12,11 +13,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = [
-            'name' => 'Username',
-            'email' => 'user@mail.fr',
-            'password' => 'test',
-            'pseudo' => 'pseudo',
-            'description' => 'blablabla',
+            'name' => 'Martinez Danielle',
+            'email' => 'test1@test.fr',
+            'password' => '$2y$10$fBLjYcKCgwBX1F5IhmP7g.OgAtyydk7EPKNqO.sKa5pFm1Cywi6/6',
+            'pseudo' => 'ovopik',
+            'description' => 'Ea eveniet iusto recusandae reiciendis tempora velit!',
             'image_path' => null,
             'banner_path' => null,
             'location' => null,
@@ -24,7 +25,20 @@ class UserSeeder extends Seeder
             'birthdate'  => null,
             'isAdmin'  => true
         ];
-
-        \App\User::create($user);
+        User::create($user);
+        $user = [
+            'name' => 'Hector S. Harrison',
+            'email' => 'test2@test.fr',
+            'password' => '$2y$10$fBLjYcKCgwBX1F5IhmP7g.OgAtyydk7EPKNqO.sKa5pFm1Cywi6/6',
+            'pseudo' => 'hectorha',
+            'description' => 'Ea eveniet iusto recusandae reiciendis tempora velit!',
+            'image_path' => null,
+            'banner_path' => null,
+            'location' => null,
+            'website' => null,
+            'birthdate'  => null,
+            'isAdmin'  => true
+        ];
+        User::create($user);
     }
 }

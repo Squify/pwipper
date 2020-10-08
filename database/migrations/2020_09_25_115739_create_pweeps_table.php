@@ -29,6 +29,13 @@ class CreatePweepsTable extends Migration
                 ->on('pweeps')
                 ->onDelete('SET NULL');
 
+            $table->unsignedBigInteger('initial_author_id')->nullable();
+
+            $table->foreign('initial_author_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('SET NULL');
+
             $table->timestamps();
         });
     }

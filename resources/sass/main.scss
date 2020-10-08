@@ -81,3 +81,13 @@ body {
         color: whitesmoke;
     }
 }
+
+.display-flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.display-flex-column {
+    display: flex;
+    flex-direction: column;
+}

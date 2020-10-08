@@ -88,32 +88,7 @@
             <div class="tab-pane active pweep-list" id="pweep" role="tabpanel"
                  aria-labelledby="pweep-tab">
                 @foreach($pweeps as $pweep)
-                    <div class="pweep grey-thin-border">
-                        <div class="col-2">
-                            <picture>
-                                @if($pweep->author->image_path)
-                                    <img src="{{ asset('storage/' . $pweep->author->image_path) }}"
-                                         class="profile_pic img-fluid rounded-circle img-thumbnail">
-                                @else
-                                    <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                                         class="profile_pic img-fluid rounded-circle img-thumbnail">
-                                @endif
-                            </picture>
-                        </div>
-                        <div class="col-10">
-                            <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                                <div class="left">
-                                    <p style="display: flex; flex-direction: row; justify-content: space-around;">
-                                        <b>{{ $pweep->author->name . ' _'}}</b>{{' @' . $pweep->author->pseudo }} ·
-                                        <small>{{ $pweep->created_at->format('H:m') }}</small>
-                                    </p>
-                                </div>
-                                @include('components.modal.dropdown', ['pweep' => $pweep])
-                            </div>
-                            <p>{{ $pweep->message }}</p>
-                            @include('components.img.pweep', ['pweep' => $pweep])
-                        </div>
-                    </div>
+                    @include('components.pweep', ['pweep' => $pweep, 'currentUser' => $currentUser])
                 @endforeach
                 @if(!$pweeps)
                     <div class="pweep grey-thin-border">
@@ -123,43 +98,23 @@
             </div>
             <div class="tab-pane pweep-list" id="media" role="tabpanel" aria-labelledby="media-tab">
                 @foreach($medias as $media)
-                    <div class="pweep grey-thin-border">
-                        <div class="col-2">
-                            <picture>
-                                @if($media->author->image_path)
-                                    <img src="{{ asset('storage/' . $media->author->image_path) }}"
-                                         class="profile_pic img-fluid rounded-circle img-thumbnail">
-                                @else
-                                    <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                                         class="profile_pic img-fluid rounded-circle img-thumbnail">
-                                @endif
-                            </picture>
-                        </div>
-                        <div class="col-10">
-                            <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                                <div class="left">
-                                    <p style="display: flex; flex-direction: row; justify-content: space-around;">
-                                        <b>{{ $media->author->name . ' _'}}</b>{{' @' . $media->author->pseudo }} ·
-                                        <small>{{ $media->created_at->format('H:m') }}</small>
-                                    </p>
-                                </div>
-                                @include('components.modal.dropdown', ['pweep' => $media])
-                            </div>
-                            <p>{{ $media->message }}</p>
-                            @include('components.img.pweep', ['pweep' => $media])
-                        </div>
-                    </div>
+                    @include('components.pweep', ['pweep' => $media, 'currentUser' => $currentUser])
                 @endforeach
                 @if(!$medias)
-                <div class="pweep grey-thin-border">
-                    <p>Aucun pweep avec image pour le moment</p>
-                </div>
+                    <div class="pweep grey-thin-border">
+                        <p>Aucun pweep avec image pour le moment</p>
+                    </div>
                 @endif
             </div>
             <div class="tab-pane pweep-list" id="like" role="tabpanel" aria-labelledby="like-tab">
-                <div class="pweep grey-thin-border">
-                    <h1>Récupérer les mentions j'aime et mettre la même boucle qu'en haut</h1>
-                </div>
+                @foreach($user->like as $pweepLike)
+                    @include('components.pweep', ['pweep' => $pweepLike, 'currentUser' => $currentUser])
+                @endforeach
+                @if($user->like->count() == 0)
+                    <div class="pweep grey-thin-border">
+                        <p>Aucun pweep liké pour le moment</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
