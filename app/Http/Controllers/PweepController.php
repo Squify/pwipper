@@ -117,7 +117,7 @@ class PweepController
                 'updated_at' => now(),
                 'initial_author_id' => $initialPweep->author->id,
                 'initial_pweep_id' => $initialPweep->id,
-                'users_like' => $initialPweep->users_like
+//                'users_like' => $initialPweep->users_like
             ]);
         }
 
