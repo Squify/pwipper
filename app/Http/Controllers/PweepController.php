@@ -6,23 +6,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\UpdatePweepRequest;
 use App\Pweep;
+use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class PweepController
 {
 
     /**
      * View of home with all posts
-     * @return \Illuminate\Contracts\View\Factory\Illuminate\View\View
      */
     public function index()
     {
+        $user = User::findOrFail(Auth::id());
         $pweeps = Pweep::orderBy('created_at', 'DESC')
+            ->orderBy('updated_at', 'DESC')
             ->where(['is_deleted' => false])
             ->get()
             ->all();
-        return view('homepage')->with('pweeps', $pweeps);
+        return view('homepage')->with([
+            'pweeps' => $pweeps,
+            'user' => $user
+        ]);
     }
 
     /**
@@ -80,6 +84,60 @@ class PweepController
                 'message' => $data['message'],
                 'updated_at' => now(),
             ]);
+        return back();
+    }
+
+    /**
+     * Repweep a pweep
+     */
+    public function repweep($pweepId)
+    {
+        $initialPweep = Pweep::where('id', $pweepId)->firstOrFail();
+
+        Pweep::where('author_id', Auth::id())
+            ->where('initial_pweep_id', $initialPweep->id)
+            ->where('is_deleted', true)
+            ->update(['is_deleted' => false, 'created_at' => $initialPweep->created_at , 'updated_at' => now()]);
+
+        $exists = Pweep::where('author_id', Auth::id())
+            ->where('initial_pweep_id', $initialPweep->id)
+            ->where('is_deleted', false)
+            ->exists();
+
+        if (!$exists) {
+            Pweep::insert([
+                'image_path_1' => $initialPweep->image_path_1 ? $initialPweep->image_path_1 : null,
+                'image_path_2' => $initialPweep->image_path_2 ? $initialPweep->image_path_2 : null,
+                'image_path_3' => $initialPweep->image_path_3 ? $initialPweep->image_path_3 : null,
+                'image_path_4' => $initialPweep->image_path_4 ? $initialPweep->image_path_4 : null,
+                'message' => $initialPweep->message,
+                'is_deleted' => false,
+                'author_id' => Auth::id(),
+                'created_at' => $initialPweep->created_at,
+                'updated_at' => now(),
+                'initial_author_id' => $initialPweep->author->id,
+                'initial_pweep_id' => $initialPweep->id,
+//                'users_like' => $initialPweep->users_like
+            ]);
+        }
+
+        return back();
+    }
+
+    /**
+     * Dis/Like a pweep
+     */
+    public function like($pweepId) {
+
+        $user = User::findOrFail(Auth::id());
+        $pweep = Pweep::where('id', $pweepId)->firstOrFail();
+
+        if ($user->like->contains($pweep))
+            $user->like()->detach($pweep);
+        else
+            $user->like()->attach($pweep);
+
+        $user->save();
         return back();
     }
 }

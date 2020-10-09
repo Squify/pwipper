@@ -4,12 +4,14 @@
 namespace App\Http\Controllers\Auth;
 
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
-use App\Pweep;
 use App\User;
+use App\Pweep;
+use App\Mail\DeleteMail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateUserRequest;
 
 class UpdateProfileController extends Controller
 {
@@ -73,6 +75,8 @@ class UpdateProfileController extends Controller
         Storage::delete('public/' . $user->image_path);
         if ($user->banner_path)
         Storage::delete('public/' . $user->banner_path);
+
+        Mail::to($user->email)->send(new DeleteMail($user));
 
         $user->delete();
         return back();

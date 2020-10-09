@@ -1,0 +1,26 @@
+.icons-pweep {
+    display:flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-between;
+    padding: 10px 15% 0 15%;
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    text-align: end;
+    justify-content: end;
+    width: -moz-available;
+    margin-right: 15px;
+}
+
+.repweep {
+    margin: 0 0 5px 15%;
+    color: #6C757D;
+    min-width: 60%;
+}
+
+.white {
+    color: white;
+}
