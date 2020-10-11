@@ -239,7 +239,7 @@ body {
   display: flex;
   flex-direction: row;
   text-align: end;
-  justify-content: end;
+  justify-content: flex-end;
   width: -moz-available;
   margin-right: 15px;
 }
