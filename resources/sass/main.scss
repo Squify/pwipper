@@ -42,14 +42,14 @@ $light-gray: #d3d5d7ff;
         border-color: #253341;
         color: whitesmoke;
     }
+}
 
-    .dropdown-menu {
-        background: #253341;
+.dropdown-menu {
+    background: #253341;
 
-        :hover {
-            background: #35495B;
-            border-color: #35495B;
-        }
+    :hover {
+        background: #35495B;
+        border-color: #35495B;
     }
 }
 

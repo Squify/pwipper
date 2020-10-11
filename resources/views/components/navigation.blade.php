@@ -16,26 +16,32 @@
                     Accueil
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link"  href="#">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                    </svg>
-                    Notifications
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-square-dots-fill"
-                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                    </svg>
-                    Messages
-                </a>
-            </li>
+            @if(Auth::check())
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                        <span id="notificationsTitle" >Notifications</span>
+                    </a>
+                    <div class="dropdown-menu" id="notificationsDropdown" aria-labelledby="notificationsTitle">.
+                        <div class="dropdown-item">No notifications</div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-square-dots-fill"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                        </svg>
+                        Messages
+                    </a>
+                </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hash" fill="currentColor"
@@ -119,3 +125,74 @@
         </div>
     </div>
 </nav>
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+
+            //On met généralement des $ en préfix de variable quand ce sont des éléments HTML jQuery (c'est pas obligatoire)
+            var $notificationsTitle = $('#notificationsTitle');
+            var $notificationsDropdown = $('#notificationsDropdown');
+
+            function loadNotifications(){
+                //Récupère le contenu de l'API grace a Ajax de jQuery puis on précise que nous récupérons du JSON via la méthode GET
+                $.ajax({
+                    url:"{{ route('notifications') }}",
+                    method:"GET",
+                    dataType:"json",
+                    success: function(data) {
+                        console.log(data)
+                        $notificationsDropdown.html("");
+                        var nbrNotifs = data.notifications.length;
+
+                        if(nbrNotifs >= 1){
+                            $notificationsTitle.html('Notifications (%s)'.replace(/%s/g, nbrNotifs));
+
+                            data.notifications.forEach(notification => {
+                                $notificationsDropdown.append(`
+                                    <a class="dropdown-item"><b>${notification.pseudo}</b> ${notification.message}</a>
+                                `);
+                            });
+                        }else{
+                            $notificationsTitle.html('Notifications');
+                            $notificationsDropdown.html('<a class="dropdown-item">No notifications</a>');
+                        }
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+            //Envoie a l'API que l'utilisateur a lu les notifications (puis coté backend on met is_read a true sur les notifs)
+            function readNotifications(){
+                $.ajax({
+                    url:"/api/notifications/read",
+                    method:"GET",
+                    dataType:"json",
+                    success: function(data) {
+
+                    },
+                    error: function(err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+            //Quand l'utilisateur clique sur le dropdown des notifications
+            $notificationsDropdown.click(function () {
+                readNotifications();
+
+                return false;
+            });
+
+            //Appel de la function dés le chargement de la page terminé
+            loadNotifications();
+
+            //Défini un interval pour appeler la function loadNotifications() toutes les 5000ms (5 secondes)
+            setInterval(function(){
+                loadNotifications();
+            }, 5000);
+        });
+    </script>
+@endsection

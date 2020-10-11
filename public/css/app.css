@@ -39,11 +39,11 @@
   color: whitesmoke;
 }
 
-.search-bar .dropdown-menu {
+.dropdown-menu {
   background: #253341;
 }
 
-.search-bar .dropdown-menu :hover {
+.dropdown-menu :hover {
   background: #35495B;
   border-color: #35495B;
 }

@@ -37,3 +37,4 @@ Route::post('/pweep/{id}', 'PweepController@update')->name('updatePweep')->middl
 Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep')->middleware('auth');
 Route::get('/pweep/repweep/{id}', 'PweepController@repweep')->name('repweep')->middleware('auth');
 
+Route::get('/notifications', 'NotificationController@index')->name('notifications')->middleware('auth');
