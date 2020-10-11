@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function like()
     {
-        return $this->belongsToMany('App\Pweep', 'like', 'user_id', 'pweep_id');
+        return $this->belongsToMany('App\Pweep', 'likes', 'user_id', 'pweep_id')->withTimestamps()->orderByDesc('created_at');
     }
 }

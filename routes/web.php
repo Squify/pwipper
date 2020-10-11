@@ -31,9 +31,9 @@ Route::get('/profile/{pseudo}', 'Auth\ProfileController@otherUserIndex')->name('
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact', 'ContactController@email')->name('sendMail');
 
-Route::post('/pweep/', 'PweepController@store')->name('storePweep');
-Route::get('/pweep/{id}', 'PweepController@remove')->name('deletePweep');
-Route::post('/pweep/{id}', 'PweepController@update')->name('updatePweep');
-Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep');
-Route::get('/pweep/repweep/{id}', 'PweepController@repweep')->name('repweep');
+Route::post('/pweep/', 'PweepController@store')->name('storePweep')->middleware('auth');
+Route::get('/pweep/{id}', 'PweepController@remove')->name('deletePweep')->middleware('auth');
+Route::post('/pweep/{id}', 'PweepController@update')->name('updatePweep')->middleware('auth');
+Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep')->middleware('auth');
+Route::get('/pweep/repweep/{id}', 'PweepController@repweep')->name('repweep')->middleware('auth');
 

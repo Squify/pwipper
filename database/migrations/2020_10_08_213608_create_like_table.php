@@ -13,7 +13,7 @@ class CreateLikeTable extends Migration
      */
     public function up()
     {
-        Schema::create('like', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pweep_id');
@@ -27,6 +27,8 @@ class CreateLikeTable extends Migration
                 ->references('id')
                 ->on('pweeps')
                 ->onDelete('restrict');
+
+            $table->timestamps();
         });
     }
 

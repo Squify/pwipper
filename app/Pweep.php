@@ -15,8 +15,10 @@ class Pweep extends Model
         'image_path_4',
         'is_deleted',
         'initial_pweep_id',
-        'initial_author_id'
+        'initial_author_id',
+        'repweep_number'
     ];
+
     public function author()
     {
         return $this->hasOne('App\User', 'id', 'author_id');
@@ -52,6 +54,6 @@ class Pweep extends Model
 
     public function users_like()
     {
-        return $this->belongsToMany('App\User', 'like', 'pweep_id', 'user_id');
+        return $this->belongsToMany('App\User', 'likes', 'pweep_id', 'user_id')->withTimestamps();
     }
 }

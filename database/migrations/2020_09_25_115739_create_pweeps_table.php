@@ -21,6 +21,7 @@ class CreatePweepsTable extends Migration
             $table->string('image_path_3')->nullable();
             $table->string('image_path_4')->nullable();
             $table->boolean('is_deleted');
+            $table->integer('repweep_number')->default(0);
 
             $table->unsignedBigInteger('initial_pweep_id')->nullable();
 

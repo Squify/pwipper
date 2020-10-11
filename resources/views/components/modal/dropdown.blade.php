@@ -10,8 +10,10 @@
                 </svg>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @if(!$pweep->initialAuthor)
                 <a class="dropdown-item" data-toggle="modal"
                     href="#updatePweep{{$pweep->id}}">Éditer</a>
+                @endif
                 <a class="dropdown-item" data-toggle="modal"
                     href="#deletePweep{{$pweep->id}}">Supprimer</a>
             </div>
