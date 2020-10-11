@@ -41,17 +41,20 @@ class PweepController
         else $initialPweep = null;
 
         $pweep->is_deleted = true;
-        $pweep->repweep_number -= 1;
+        $pweep->repweep_counter -= 1;
+        $pweep->timestamps = false;
         $pweep->save();
 
         if ($initialPweep) {
-            $initialPweep->repweep_number = $pweep->repweep_number;
+            $initialPweep->repweep_counter = $pweep->repweep_counter;
+            $initialPweep->timestamps = false;
             $initialPweep->save();
         }
 
         $repweeps = Pweep::where(['initial_pweep_id' => $initialPweep ? $initialPweep->id : $pweep->id])->get()->all();
         foreach ($repweeps as $repweep) {
-            $repweep->repweep_number = $pweep->repweep_number;
+            $repweep->repweep_counter = $pweep->repweep_counter;
+            $repweep->timestamps = false;
             $repweep->save();
         }
         return back();
@@ -125,10 +128,12 @@ class PweepController
                 ->where('is_deleted', true)
                 ->first();
             if ($deletedPweep) {
-                $sendPweepToRepweep->repweep_number += 1;
+                $sendPweepToRepweep->repweep_counter += 1;
+                $sendPweepToRepweep->timestamps = false;
                 $sendPweepToRepweep->save();
                 if ($initialPweep) {
-                    $initialPweep->repweep_number += 1;
+                    $initialPweep->repweep_counter += 1;
+                    $initialPweep->timestamps = false;
                     $initialPweep->save();
                 }
 
@@ -139,14 +144,17 @@ class PweepController
                 foreach ($sendPweepToRepweep->users_like as $like) {
                     $deletedPweep->users_like()->attach($like);
                 }
-                $deletedPweep->repweep_number = $sendPweepToRepweep->repweep_number;
+                $deletedPweep->repweep_counter = $sendPweepToRepweep->repweep_counter;
+                $deletedPweep->timestamps = false;
                 $deletedPweep->save();
             }
         } else {
-            $sendPweepToRepweep->repweep_number += 1;
+            $sendPweepToRepweep->repweep_counter += 1;
+            $sendPweepToRepweep->timestamps = false;
             $sendPweepToRepweep->save();
             if ($initialPweep) {
-                $initialPweep->repweep_number += 1;
+                $initialPweep->repweep_counter += 1;
+                $initialPweep->timestamps = false;
                 $initialPweep->save();
             }
 
@@ -162,12 +170,13 @@ class PweepController
                 'updated_at' => now(),
                 'initial_author_id' => $sendPweepToRepweep->initial_author_id ? $sendPweepToRepweep->initial_author_id : $sendPweepToRepweep->author->id,
                 'initial_pweep_id' => $sendPweepToRepweep->initial_pweep_id ? $sendPweepToRepweep->initial_pweep_id : $sendPweepToRepweep->id,
-                'repweep_number' => $sendPweepToRepweep->repweep_number,
+                'repweep_counter' => $sendPweepToRepweep->repweep_counter,
             ]);
             $pweep = Pweep::where('author_id', Auth::id())->latest('updated_at')->first();
             foreach ($sendPweepToRepweep->users_like as $like) {
                 $pweep->users_like()->attach($like);
             }
+            $pweep->timestamps = false;
             $pweep->save();
         }
 
@@ -191,15 +200,23 @@ class PweepController
 
         if ($user->like->contains($pweep)) {
             $user->like()->detach($pweep);
+            $pweep->like_counter -= 1;
+            $pweep->timestamps = false;
+            $pweep->save();
             foreach ($repweeps as $repweep) {
-                $user->like()->detach($repweep);
-                $user->save();
+                $repweep->like_counter -= 1;
+                $repweep->timestamps = false;
+                $repweep->save();
             }
         } else {
             $user->like()->attach($pweep);
+            $pweep->like_counter += 1;
+            $pweep->timestamps = false;
+            $pweep->save();
             foreach ($repweeps as $repweep) {
-                $user->like()->attach($repweep);
-                $user->save();
+                $repweep->like_counter += 1;
+                $repweep->timestamps = false;
+                $repweep->save();
             }
         }
 

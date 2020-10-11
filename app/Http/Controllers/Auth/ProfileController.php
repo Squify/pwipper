@@ -20,20 +20,23 @@ class ProfileController extends Controller
         $user = User::findOrFail(Auth::id());
         $currentUser = User::findOrFail(Auth::id());
         $pweeps = Pweep::where('author_id', $user->id)
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('updated_at', 'DESC')
             ->where(['is_deleted' => false])
             ->get()
             ->all();
         $medias = Pweep::whereNotNull('image_path_1')
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('updated_at', 'DESC')
             ->where(['is_deleted' => false, 'author_id' => $user->id, 'initial_pweep_id' => null])
             ->get()
             ->all();
+        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
+
         return view('auth/profile')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
             'medias' => $medias,
+            'likes' => $likes,
         ]);
     }
 
@@ -43,7 +46,8 @@ class ProfileController extends Controller
     public function otherUserIndex($pseudo)
     {
         $user = User::where('pseudo', $pseudo)->firstOrFail();
-        $currentUser = User::findOrFail(Auth::id());
+        $currentUser = User::where('id', Auth::id())->first();
+
         $pweeps = Pweep::where('author_id', $user->id)
             ->orderBy('created_at', 'DESC')
             ->where(['is_deleted' => false])
@@ -55,11 +59,14 @@ class ProfileController extends Controller
             ->where(['is_deleted' => false])
             ->get()
             ->all();
+        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
+
         return view('auth/profile')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
             'medias' => $medias,
+            'likes' => $likes,
         ]);
     }
 }
