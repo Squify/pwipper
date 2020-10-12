@@ -39,4 +39,3 @@ Route::get('/pweep/{id}', 'PweepController@remove')->name('deletePweep')->middle
 Route::post('/pweep/{id}', 'PweepController@update')->name('updatePweep')->middleware('auth');
 Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep')->middleware('auth');
 Route::get('/pweep/repweep/{id}', 'PweepController@repweep')->name('repweep')->middleware('auth');
-

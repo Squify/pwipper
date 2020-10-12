@@ -26,5 +26,9 @@
 }
 
 .white {
-    color: white;
+    color: whitesmoke;
+    :hover{
+        text-decoration: underline;
+        color: whitesmoke;
+    }
 }

@@ -29,30 +29,33 @@
         background-color: #27303a;
     }
 
+    .pweep {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .dropdown {
+        color: white;
+
+        .dropdown-menu {
+            background: #253341;
+
+            a {
+                color: white;
+            }
+
+            :hover {
+                background: #35495B;
+                border-color: #35495B;
+            }
+        }
+    }
+
     .pweep-list {
         .pweep {
             display: flex;
             flex-direction: column;
-            padding-top: 15px;
-            padding-bottom: 15px;
             cursor: pointer;
-        }
-
-        .dropdown {
-            color: white;
-
-            .dropdown-menu {
-                background: #253341;
-
-                a {
-                    color: white;
-                }
-
-                :hover {
-                    background: #35495B;
-                    border-color: #35495B;
-                }
-            }
         }
     }
 }

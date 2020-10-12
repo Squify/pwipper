@@ -16,7 +16,9 @@
         </div>
 
             @include('components.pweep.pweep', ['pweep' => $pweep, 'user' => $currentUser])
-            <div class="pweep grey-thin-border"></div>
+            <div class="grey-thin-border"></div>
+
     </div>
+
 
 @endsection
