@@ -64,7 +64,7 @@
                 </div>
                 @include('components.modal.dropdown', ['pweep' => $pweep])
             </div>
-            @if(Route::current()->getName() == 'homepage')
+            @if(Route::is('homepage') || Route::is('profile'))
                 <a href="{{ route('detailsPweep', $pweep->id ) }}" style="color: whitesmoke; text-decoration: none;">
                     <p>
                         {{ $pweep->message }}
