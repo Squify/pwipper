@@ -31,7 +31,7 @@ class PweepController
         ]);
     }
 
-        /**
+    /**
      * Details pweep
      */
     public function details($id)
