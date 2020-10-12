@@ -25,14 +25,18 @@
         background-color: #253341;
     }
 
+    .hover:hover {
+        background-color: #27303a;
+    }
+
     .pweep-list {
         .pweep {
             display: flex;
             flex-direction: column;
             padding-top: 15px;
             padding-bottom: 15px;
+            cursor: pointer;
         }
-
         .dropdown {
             color: white;
 

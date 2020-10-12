@@ -114,11 +114,16 @@ body {
   background-color: #253341;
 }
 
+.main-container .hover:hover {
+  background-color: #27303a;
+}
+
 .main-container .pweep-list .pweep {
   display: flex;
   flex-direction: column;
   padding-top: 15px;
   padding-bottom: 15px;
+  cursor: pointer;
 }
 
 .main-container .pweep-list .dropdown {
@@ -233,6 +238,10 @@ body {
   text-align: center;
   justify-content: space-between;
   padding: 10px 15% 0 15%;
+}
+
+.icons-pweep .white {
+  color: whitesmoke;
 }
 
 .date {

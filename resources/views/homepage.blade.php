@@ -51,7 +51,7 @@
         @endif
         <div class="pweep-list">
             @foreach($pweeps as $pweep)
-                @include('components.pweep', ['pweep' => $pweep, 'currentUser' => $user])
+                @include('components.pweep.pweep', ['pweep' => $pweep, 'currentUser' => $user])
             @endforeach
         </div>
         <div class="grey-thin-border"></div>

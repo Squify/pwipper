@@ -31,6 +31,19 @@ class PweepController
         ]);
     }
 
+        /**
+     * Details pweep
+     */
+    public function details($id)
+    {
+        $currentUser = User::findOrFail(Auth::id());
+        $pweep = Pweep::where('id', $id)->firstOrFail();
+        return view('components/pweep/detailsPweep')->with([
+            'pweep'=> $pweep,
+            'currentUser'=> $currentUser,
+        ]);
+    }
+
     /**
      * Delete pweep
      */
