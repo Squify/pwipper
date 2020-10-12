@@ -124,7 +124,7 @@ body {
 }
 
 .main-container .dropdown {
-  color: white;
+  color: whitesmoke;
 }
 
 .main-container .dropdown .dropdown-menu {
@@ -132,7 +132,7 @@ body {
 }
 
 .main-container .dropdown .dropdown-menu a {
-  color: white;
+  color: whitesmoke;
 }
 
 .main-container .dropdown .dropdown-menu :hover {
