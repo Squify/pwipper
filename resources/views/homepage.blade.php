@@ -54,6 +54,7 @@
                 @include('components.pweep', ['pweep' => $pweep, 'currentUser' => $user])
             @endforeach
         </div>
+        <div class="grey-thin-border"></div>
     </div>
 
     <script>

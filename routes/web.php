@@ -28,10 +28,12 @@ Route::get('/profile/remove', 'Auth\UpdateProfileController@remove')->name('dele
 
 Route::get('/profile/{pseudo}', 'Auth\ProfileController@otherUserIndex')->name('profileOther');
 
+Route::get('/search', 'PweepController@search')->name('search')->middleware('auth');;
+
 Route::get('/contact', 'ContactController@index')->name('contact');
 Route::post('/contact', 'ContactController@email')->name('sendMail');
 
-Route::post('/pweep/', 'PweepController@store')->name('storePweep')->middleware('auth');
+Route::post('/pweep', 'PweepController@store')->name('storePweep')->middleware('auth');
 Route::get('/pweep/{id}', 'PweepController@remove')->name('deletePweep')->middleware('auth');
 Route::post('/pweep/{id}', 'PweepController@update')->name('updatePweep')->middleware('auth');
 Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep')->middleware('auth');

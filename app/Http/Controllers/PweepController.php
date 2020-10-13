@@ -3,11 +3,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePweepRequest;
-use App\Http\Requests\UpdatePweepRequest;
-use App\Pweep;
 use App\User;
+use App\Pweep;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePweepRequest;
+use App\Http\Requests\SearchPweepRequest;
+use App\Http\Requests\UpdatePweepRequest;
 
 class PweepController
 {
@@ -205,5 +206,22 @@ class PweepController
 
         $user->save();
         return back();
+    }
+
+    public function search(SearchPweepRequest $request)
+    {
+        $user = User::where('id', Auth::id())->first();
+        $data = $request->input();
+        $pweeps = Pweep::where('message', 'rlike', "[[:<:]]".$data['search'] ."[[:>:]]")
+            ->orderBy('created_at', 'DESC')
+            ->where(['is_deleted' => false])
+            ->get()
+            ->all();
+
+        return view('components/search')->with([
+            'pweeps' => $pweeps,
+            'user' => $user,
+            'search' => $data['search'],
+        ]);
     }
 }
