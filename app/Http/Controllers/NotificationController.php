@@ -19,6 +19,7 @@ class NotificationController extends Controller
 
         foreach ($notifications as $notification) {
             array_push($jsonNotifications, [
+                'pweep_link' => $notification->initiator->pseudo,
                 'pseudo' => $notification->initiator->pseudo,
                 'pweep_id' => $notification->pweep->id,
                 'message' => $notification->type->message,
@@ -27,5 +28,16 @@ class NotificationController extends Controller
 
         return response()
             ->json(['notifications' => $jsonNotifications]);
+    }
+
+    public function createNotification(int $receiverId, int $initiatorId, int $pweepId, int $typeId)
+    {
+        Notification::insert([
+            'receiver_id' => $receiverId,
+            'initiator_id' => $initiatorId,
+            'pweep_id' => $pweepId,
+            'type_id' => $typeId,
+            'is_read' => false,
+        ]);
     }
 }

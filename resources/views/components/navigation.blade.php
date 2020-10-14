@@ -25,12 +25,13 @@
                             <path
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
                         </svg>
-                        <span id="notificationsTitle" >Notifications</span>
+                        <span id="notificationsTitle">Notifications</span>
                     </a>
                     <div class="dropdown-menu" id="notificationsDropdown" aria-labelledby="notificationsTitle">.
-                        <div class="dropdown-item">No notifications</div>
+                        <div class="dropdown-item notification-item">No notifications</div>
                     </div>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-square-dots-fill"
@@ -150,12 +151,12 @@
 
                             data.notifications.forEach(notification => {
                                 $notificationsDropdown.append(`
-                                    <a class="dropdown-item"><b>${notification.pseudo}</b> ${notification.message}</a>
+                                    <div class="dropdown-item notification-item"><b>${notification.pseudo}</b> ${notification.message}</div>
                                 `);
                             });
                         }else{
                             $notificationsTitle.html('Notifications');
-                            $notificationsDropdown.html('<a class="dropdown-item">No notifications</a>');
+                            $notificationsDropdown.html('<div class="dropdown-item notification-item">No notifications</div>');
                         }
                     },
                     error: function(err) {
@@ -192,7 +193,8 @@
             //Défini un interval pour appeler la function loadNotifications() toutes les 5000ms (5 secondes)
             setInterval(function(){
                 loadNotifications();
-            }, 5000);
+            }, 5000000000);
+            // }, 5000);
         });
     </script>
 @endsection

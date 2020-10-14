@@ -1,0 +1,12 @@
+.notification-item {
+    color: #BBBBC3;
+
+    :hover {
+        background: #35495B;
+        border-color: #35495B;
+    }
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: ghostwhite;
+}
