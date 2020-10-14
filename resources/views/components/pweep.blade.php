@@ -62,11 +62,20 @@
                         @endif
                     </p>
                 </div>
-
                 @include('components.modal.dropdown', ['pweep' => $pweep])
             </div>
             <p>
-                {{ $pweep->message }}
+                @if(Route::is('search'))
+                    @foreach(explode(' ', $pweep->message) as $word)
+                        @if($word == $search)
+                            <b><u>{{ $word }}</u></b>
+                        @else
+                            {{ $word }}
+                        @endif
+                    @endforeach
+                @else
+                    {{ $pweep->message }}
+                @endif
             </p>
             @include('components.img.pweep', ['pweep' => $pweep])
         </div>

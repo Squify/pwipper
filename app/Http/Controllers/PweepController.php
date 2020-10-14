@@ -27,7 +27,7 @@ class PweepController
             ->all();
         return view('homepage')->with([
             'pweeps' => $pweeps,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
