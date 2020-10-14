@@ -88,7 +88,7 @@
             <div class="tab-pane active pweep-list" id="pweep" role="tabpanel"
                  aria-labelledby="pweep-tab">
                 @foreach($pweeps as $pweep)
-                    @include('components.pweep', ['pweep' => $pweep, 'currentUser' => $currentUser ? $currentUser : $user])
+                    @include('components.pweep.pweep', ['pweep' => $pweep, 'currentUser' => $currentUser ? $currentUser : $user])
                 @endforeach
                 @if(!$pweeps)
                     <div class="pweep grey-thin-border" style="text-align: center;">
@@ -99,7 +99,7 @@
             </div>
             <div class="tab-pane pweep-list" id="media" role="tabpanel" aria-labelledby="media-tab">
                 @foreach($medias as $media)
-                    @include('components.pweep', ['pweep' => $media, 'currentUser' => $currentUser ? $currentUser : $user])
+                    @include('components.pweep.pweep', ['pweep' => $media, 'currentUser' => $currentUser ? $currentUser : $user])
                 @endforeach
                 @if(!$medias)
                     <div class="pweep grey-thin-border" style="text-align: center;">
@@ -110,7 +110,7 @@
             </div>
             <div class="tab-pane pweep-list" id="like" role="tabpanel" aria-labelledby="like-tab">
                 @foreach($likes as $pweepLike)
-                    @include('components.pweep', ['pweep' => $pweepLike, 'currentUser' => $currentUser ? $currentUser : $user])
+                    @include('components.pweep.pweep', ['pweep' => $pweepLike, 'currentUser' => $currentUser ? $currentUser : $user])
                 @endforeach
                 @if($user->like->count() == 0)
                     <div class="pweep grey-thin-border" style="text-align: center;">
