@@ -3,12 +3,12 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Pweep;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\SearchPweepRequest;
+use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\UpdatePweepRequest;
+use App\Pweep;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class PweepController
 {
@@ -39,8 +39,8 @@ class PweepController
         $currentUser = User::findOrFail(Auth::id());
         $pweep = Pweep::where('id', $id)->firstOrFail();
         return view('components/pweep/detailsPweep')->with([
-            'pweep'=> $pweep,
-            'currentUser'=> $currentUser,
+            'pweep' => $pweep,
+            'currentUser' => $currentUser,
         ]);
     }
 
@@ -217,6 +217,11 @@ class PweepController
             $pweep->like_counter -= 1;
             $pweep->timestamps = false;
             $pweep->save();
+            if ($initialPweep) {
+                $initialPweep->like_counter -= 1;
+                $initialPweep->timestamps = false;
+                $initialPweep->save();
+            }
             foreach ($repweeps as $repweep) {
                 $repweep->like_counter -= 1;
                 $repweep->timestamps = false;
@@ -227,6 +232,11 @@ class PweepController
             $pweep->like_counter += 1;
             $pweep->timestamps = false;
             $pweep->save();
+            if ($initialPweep) {
+                $initialPweep->like_counter += 1;
+                $initialPweep->timestamps = false;
+                $initialPweep->save();
+            }
             foreach ($repweeps as $repweep) {
                 $repweep->like_counter += 1;
                 $repweep->timestamps = false;
