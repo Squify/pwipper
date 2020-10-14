@@ -8,7 +8,7 @@
                 <div class="card-header">Contact</div>
 
                 <div class="card-body">
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{route('sendMail')}}">
                         @csrf
 
                         <div class="form-group row">

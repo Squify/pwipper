@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchPweepRequest;
 use App\Http\Requests\StorePweepRequest;
 use App\Http\Requests\UpdatePweepRequest;
 use App\Pweep;
@@ -26,7 +27,20 @@ class PweepController
             ->all();
         return view('homepage')->with([
             'pweeps' => $pweeps,
-            'user' => $user
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * Details pweep
+     */
+    public function details($id)
+    {
+        $currentUser = User::findOrFail(Auth::id());
+        $pweep = Pweep::where('id', $id)->firstOrFail();
+        return view('components/pweep/detailsPweep')->with([
+            'pweep' => $pweep,
+            'currentUser' => $currentUser,
         ]);
     }
 
@@ -203,6 +217,11 @@ class PweepController
             $pweep->like_counter -= 1;
             $pweep->timestamps = false;
             $pweep->save();
+            if ($initialPweep) {
+                $initialPweep->like_counter -= 1;
+                $initialPweep->timestamps = false;
+                $initialPweep->save();
+            }
             foreach ($repweeps as $repweep) {
                 $repweep->like_counter -= 1;
                 $repweep->timestamps = false;
@@ -213,6 +232,11 @@ class PweepController
             $pweep->like_counter += 1;
             $pweep->timestamps = false;
             $pweep->save();
+            if ($initialPweep) {
+                $initialPweep->like_counter += 1;
+                $initialPweep->timestamps = false;
+                $initialPweep->save();
+            }
             foreach ($repweeps as $repweep) {
                 $repweep->like_counter += 1;
                 $repweep->timestamps = false;
@@ -222,5 +246,22 @@ class PweepController
 
         $user->save();
         return back();
+    }
+
+    public function search(SearchPweepRequest $request)
+    {
+        $user = User::where('id', Auth::id())->first();
+        $data = $request->input('q');
+        $pweeps = Pweep::where('message', 'rlike', "[[:<:]]" . $data . "[[:>:]]")
+            ->orderBy('created_at', 'DESC')
+            ->where(['is_deleted' => false])
+            ->get()
+            ->all();
+
+        return view('components/search')->with([
+            'pweeps' => $pweeps,
+            'user' => $user,
+            'search' => $data,
+        ]);
     }
 }

@@ -4,6 +4,10 @@
     text-align: center;
     justify-content: space-between;
     padding: 10px 15% 0 15%;
+
+    .white {
+        color: whitesmoke;
+    }
 }
 
 .date {
@@ -22,5 +26,9 @@
 }
 
 .white {
-    color: white;
+    color: whitesmoke;
+    :hover{
+        text-decoration: underline;
+        color: whitesmoke;
+    }
 }

@@ -114,28 +114,36 @@ body {
   background-color: #253341;
 }
 
-.main-container .pweep-list .pweep {
-  display: flex;
-  flex-direction: column;
+.main-container .hover:hover {
+  background-color: #27303a;
+}
+
+.main-container .pweep {
   padding-top: 15px;
   padding-bottom: 15px;
 }
 
-.main-container .pweep-list .dropdown {
-  color: white;
+.main-container .dropdown {
+  color: whitesmoke;
 }
 
-.main-container .pweep-list .dropdown .dropdown-menu {
+.main-container .dropdown .dropdown-menu {
   background: #253341;
 }
 
-.main-container .pweep-list .dropdown .dropdown-menu a {
-  color: white;
+.main-container .dropdown .dropdown-menu a {
+  color: whitesmoke;
 }
 
-.main-container .pweep-list .dropdown .dropdown-menu :hover {
+.main-container .dropdown .dropdown-menu :hover {
   background: #35495B;
   border-color: #35495B;
+}
+
+.main-container .pweep-list .pweep {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
 
 .grey-thin-border {
@@ -235,6 +243,10 @@ body {
   padding: 10px 15% 0 15%;
 }
 
+.icons-pweep .white {
+  color: whitesmoke;
+}
+
 .date {
   display: flex;
   flex-direction: row;
@@ -251,6 +263,11 @@ body {
 }
 
 .white {
-  color: white;
+  color: whitesmoke;
+}
+
+.white :hover {
+  text-decoration: underline;
+  color: whitesmoke;
 }
 
