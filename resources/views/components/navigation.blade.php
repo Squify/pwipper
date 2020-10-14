@@ -101,7 +101,7 @@
             @endif
             <form class="form-inline" action="{{route('search')}}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search" name="search"
+                    <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search" name="q"
                         aria-describedby="basic-addon1">
                     <div class="input-group-prepend">
                         <span class="input-group-text search-button" id="basic-addon1">

@@ -14,9 +14,7 @@
         <div class="grey-thin-border"></div>
         @if(empty($pweeps))
             <p style="margin-top: 12px;"> Aucun résultat <p>
-            @include('components.errors')
         @endif
-
     </div>
 
     <script>

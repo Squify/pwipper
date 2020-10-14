@@ -211,8 +211,8 @@ class PweepController
     public function search(SearchPweepRequest $request)
     {
         $user = User::where('id', Auth::id())->first();
-        $data = $request->input();
-        $pweeps = Pweep::where('message', 'rlike', "[[:<:]]".$data['search'] ."[[:>:]]")
+        $data = $request->input('q');
+        $pweeps = Pweep::where('message', 'rlike', "[[:<:]]" . $data . "[[:>:]]")
             ->orderBy('created_at', 'DESC')
             ->where(['is_deleted' => false])
             ->get()
@@ -221,7 +221,7 @@ class PweepController
         return view('components/search')->with([
             'pweeps' => $pweeps,
             'user' => $user,
-            'search' => $data['search'],
+            'search' => $data,
         ]);
     }
 }

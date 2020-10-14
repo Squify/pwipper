@@ -24,7 +24,7 @@ class SearchPweepRequest extends FormRequest
     public function rules()
     {
         return [
-            'search' => 'required|min:3',
+            'q' => 'required|min:3',
         ];
     }
 }
