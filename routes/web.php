@@ -28,6 +28,9 @@ Route::get('/profile/remove', 'Auth\UpdateProfileController@remove')->name('dele
 
 Route::get('/profile/{pseudo}', 'Auth\ProfileController@otherUserIndex')->name('profileOther');
 
+Route::get('/profile/media/{pseudo}', 'Auth\ProfileController@media')->name('mediaProfile')->middleware('auth');
+Route::get('/profile/likes/{pseudo}', 'Auth\ProfileController@likes')->name('likesProfile')->middleware('auth');
+
 Route::get('/search', 'PweepController@search')->name('search')->middleware('auth');
 
 Route::get('/contact', 'ContactController@index')->name('contact');

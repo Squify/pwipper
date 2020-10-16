@@ -31,7 +31,7 @@ class ProfileController extends Controller
             ->all();
         $likes = $user->like()->orderByDesc('likes.updated_at')->get();
 
-        return view('auth/profile')->with([
+        return view('auth/profile/profile')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
@@ -61,11 +61,41 @@ class ProfileController extends Controller
             ->all();
         $likes = $user->like()->orderByDesc('likes.updated_at')->get();
 
-        return view('auth/profile')->with([
+        return view('auth/profile/profile')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
             'medias' => $medias,
+            'likes' => $likes,
+        ]);
+    }
+
+    public function media($pseudo)
+    {
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
+        $currentUser = User::findOrFail(Auth::id());
+        $medias = Pweep::whereNotNull('image_path_1')
+            ->orderBy('updated_at', 'DESC')
+            ->where(['is_deleted' => false, 'author_id' => $user->id, 'initial_pweep_id' => null])
+            ->get()
+            ->all();
+
+        return view('auth/profile/media')->with([
+            'user' => $user,
+            'currentUser' => $currentUser,
+            'medias' => $medias,
+        ]);
+    }
+
+    public function likes($pseudo)
+    {
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
+        $currentUser = User::findOrFail(Auth::id());
+        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
+
+        return view('auth/profile/likes')->with([
+            'user' => $user,
+            'currentUser' => $currentUser,
             'likes' => $likes,
         ]);
     }
