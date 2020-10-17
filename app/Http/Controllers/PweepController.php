@@ -20,8 +20,7 @@ class PweepController
     public function index()
     {
         $user = User::where('id', Auth::id())->first();
-        $pweeps = Pweep::orderBy('created_at', 'DESC')
-            ->orderBy('updated_at', 'DESC')
+        $pweeps = Pweep::orderBy('updated_at', 'DESC')
             ->where(['is_deleted' => false])
             ->get()
             ->all();
@@ -103,7 +102,7 @@ class PweepController
             'is_deleted' => false,
             'author_id' => Auth::id(),
             'created_at' => now(),
-            'updated_at' => null,
+            'updated_at' => now(),
         ]);
         return back();
     }

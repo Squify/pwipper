@@ -21,22 +21,10 @@
 
     <div class="display-flex-row" id="content">
         <div class="col-2">
-            @if($pweep->initialAuthor)
-                <a href="{{ url('profile', $pweep->initialAuthor->pseudo) }}">
+            @if(!$pweep->initialAuthor)
+                <a href="{{ route('profile') }}">
                     <picture>
-                        @if($pweep->initialAuthor->image_path)
-                            <img src="{{ asset('storage/' . $pweep->initialAuthor->image_path) }}"
-                                class="profile_pic img-fluid rounded-circle img-thumbnail">
-                        @else
-                            <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                                class="profile_pic img-fluid rounded-circle img-thumbnail">
-                        @endif
-                    </picture>
-                </a>
-            @else
-                <a href="{{ url('profile', $pweep->author->pseudo) }}">
-                    <picture>
-                        @if($pweep->author->image_path)
+                        @if($pweep->author->image_path )
                             <img src="{{ asset('storage/' . $pweep->author->image_path) }}"
                                 class="profile_pic img-fluid rounded-circle img-thumbnail">
                         @else
@@ -45,6 +33,18 @@
                         @endif
                     </picture>
                 </a>
+            @else
+            <a href="{{ url('profile', $pweep->initialAuthor->pseudo) }}">
+                <picture>
+                    @if($pweep->initialAuthor->image_path)
+                        <img src="{{ asset('storage/' . $pweep->initialAuthor->image_path) }}"
+                            class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @else
+                        <img src="{{ asset('storage/img/no_profile_pic.png') }}"
+                            class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @endif
+                </picture>
+            </a>
             @endif
         </div>
         <div class="col-10">

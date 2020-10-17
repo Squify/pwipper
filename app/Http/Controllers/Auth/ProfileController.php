@@ -49,7 +49,7 @@ class ProfileController extends Controller
         $currentUser = User::where('id', Auth::id())->first();
 
         $pweeps = Pweep::where('author_id', $user->id)
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('updated_at', 'DESC')
             ->where(['is_deleted' => false])
             ->get()
             ->all();
