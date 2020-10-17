@@ -17,32 +17,11 @@ class ProfileController extends Controller
      */
     public function index($pseudo)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
         $currentUser = User::findOrFail(Auth::id());
         $pweeps = Pweep::where('author_id', $user->id)
             ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false])
-            ->get()
-            ->all();
-
-        return view('auth/profile/pweeps')->with([
-            'user' => $user,
-            'currentUser' => $currentUser,
-            'pweeps' => $pweeps,
-        ]);
-    }
-
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function otherUserIndex($pseudo)
-    {
-        $user = User::where('pseudo', $pseudo)->firstOrFail();
-        $currentUser = User::where('id', Auth::id())->first();
-
-        $pweeps = Pweep::where('author_id', $user->id)
-            ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false])
+            ->where('is_deleted', false)
             ->get()
             ->all();
 
@@ -59,7 +38,11 @@ class ProfileController extends Controller
         $currentUser = User::findOrFail(Auth::id());
         $medias = Pweep::whereNotNull('image_path_1')
             ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false, 'author_id' => $user->id, 'initial_pweep_id' => null])
+            ->where([
+                'is_deleted' => false,
+                'author_id' => $user->id,
+                'initial_pweep_id' => null
+            ])
             ->get()
             ->all();
 
@@ -74,7 +57,10 @@ class ProfileController extends Controller
     {
         $user = User::where('pseudo', $pseudo)->firstOrFail();
         $currentUser = User::findOrFail(Auth::id());
-        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
+        $likes = $user->like()
+            ->orderByDesc('likes.updated_at')
+            ->where('is_deleted', false)
+            ->get();
 
         return view('auth/profile/likes')->with([
             'user' => $user,

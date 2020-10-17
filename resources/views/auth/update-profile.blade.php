@@ -8,7 +8,7 @@
                     <div class="card-header">Modifier le compte</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('updateProfile', Auth::user()->pseudo) }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -18,20 +18,6 @@
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="pseudo" class="col-md-4 col-form-label text-md-right">Pseudo</label>
-
-                                <div class="col-md-6">
-                                    <input id="pseudo" type="text" class="form-control @error('pseudo') is-invalid @enderror" name="pseudo" value="{{ $user->pseudo }}" required autocomplete="pseudo">
-
-                                    @error('pseudo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -135,7 +121,7 @@
 
                         <div class="form-group row mb-0" style="margin-top: 15px">
                             <div class="col-md-6 offset-md-4">
-                                <a type="button" class="btn btn-danger" href="{{ route('deleteProfile') }}">Supprimer mon compte</a><br>
+                                <a type="button" class="btn btn-danger" href="{{ route('deleteProfile', Auth::user()->pseudo) }}">Supprimer mon compte</a><br>
                                 <small>*un mail vous sera envoyé<small>
                             </div>
                         </div>

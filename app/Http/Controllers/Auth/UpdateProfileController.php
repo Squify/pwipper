@@ -19,9 +19,9 @@ class UpdateProfileController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($pseudo)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
         return view('auth/update-profile')->with('user', $user);
     }
 
@@ -30,11 +30,10 @@ class UpdateProfileController extends Controller
      * @param UpdateUserRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateProfile(UpdateUserRequest $request)
+    public function updateProfile(UpdateUserRequest $request, $pseudo)
     {
         $params = $request->validated();
-        $user = User::findOrFail(Auth::id());
-
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
         if (isset($params['image_path'])) {
             if (($params['image_path'] !== null) && ($params['image_path'] !== $user->image_path)) {
                 Storage::delete('public/' . $user->image_path);
@@ -56,15 +55,15 @@ class UpdateProfileController extends Controller
         }
 
         $user->update($params);
-        return redirect()->route('profile');
+        return redirect()->route('homepage');
     }
 
     /**
      * Delete user from database and set his pweeps as deleted
      */
-    public function remove()
+    public function remove($pseudo)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
         $pweeps = Pweep::where('author_id', $user->id)->get();
         foreach ($pweeps as $pweep) {
             $pweep->is_deleted = true;

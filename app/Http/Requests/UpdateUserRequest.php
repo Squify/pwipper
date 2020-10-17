@@ -25,7 +25,6 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'pseudo' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
             'location' => ['nullable', 'string', 'max:100'],
             'website' => ['nullable', 'string', 'max:100'],

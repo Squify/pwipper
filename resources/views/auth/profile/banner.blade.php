@@ -1,3 +1,8 @@
+@if($user->banner_path)
+    <img style="object-fit: cover;" src="{{ asset('storage/' . $user->banner_path) }}" width="100%" height="240px"/>
+@else
+    <img src="https://www.angelxp.eu/image/Twitter/anime/original05.jpg" width="100%" height="240px"/>
+@endif
 <div style="padding-left: 18px">
     <div class="profile-pic-container">
         @if($user->image_path)

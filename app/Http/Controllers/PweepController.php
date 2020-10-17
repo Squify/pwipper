@@ -21,7 +21,7 @@ class PweepController
     {
         $user = User::where('id', Auth::id())->first();
         $pweeps = Pweep::orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false])
+            ->where('is_deleted', false)
             ->get()
             ->all();
         return view('homepage')->with([
@@ -253,7 +253,7 @@ class PweepController
         $data = $request->input('q');
         $pweeps = Pweep::where('message', 'rlike', "[[:<:]]" . $data . "[[:>:]]")
             ->orderBy('created_at', 'DESC')
-            ->where(['is_deleted' => false])
+            ->where('is_deleted', false)
             ->get()
             ->all();
 

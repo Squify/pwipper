@@ -73,7 +73,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ url('profile', Auth::user()->pseudo) }}">Mon compte</a>
-                                <a class="dropdown-item" href="{{ route('updateProfile') }}">Modifier mon compte</a>
+                                <a class="dropdown-item" href="{{ route('updateProfile', Auth::user()->pseudo) }}">Modifier mon compte</a>
                                 <a class="dropdown-item" href="{{ route('contact') }}">Nous contacter</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">Déconnexion</a>
