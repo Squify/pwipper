@@ -24,19 +24,11 @@ class ProfileController extends Controller
             ->where(['is_deleted' => false])
             ->get()
             ->all();
-        $medias = Pweep::whereNotNull('image_path_1')
-            ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false, 'author_id' => $user->id, 'initial_pweep_id' => null])
-            ->get()
-            ->all();
-        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
 
-        return view('auth/profile/profile')->with([
+        return view('auth/profile/pweeps')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
-            'medias' => $medias,
-            'likes' => $likes,
         ]);
     }
 
@@ -53,20 +45,11 @@ class ProfileController extends Controller
             ->where(['is_deleted' => false])
             ->get()
             ->all();
-        $medias = Pweep::whereNotNull('image_path_1')
-            ->where('author_id', $user->id)
-            ->orderBy('created_at', 'DESC')
-            ->where(['is_deleted' => false])
-            ->get()
-            ->all();
-        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
 
-        return view('auth/profile/profile')->with([
+        return view('auth/profile/pweeps')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
-            'medias' => $medias,
-            'likes' => $likes,
         ]);
     }
 

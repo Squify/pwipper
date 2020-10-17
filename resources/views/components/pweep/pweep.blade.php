@@ -64,28 +64,25 @@
                 </div>
                 @include('components.modal.dropdown', ['pweep' => $pweep])
             </div>
-            @if(Route::is('homepage') || Route::is('profile'))
+            @if(Route::is('search'))
+                @foreach(explode(' ', $pweep->message) as $word)
+                <a href="{{ route('detailsPweep', $pweep->id ) }}" style="color: whitesmoke; text-decoration: none;">
+                    @if($word == $search)
+                        <b><u>{{ $word }}</u></b>
+                    @else
+                        {{ $word }}
+                    @endif
+                </a>
+                @endforeach
+                <br>
+                @include('components.img.pweep', ['pweep' => $pweep, 'user' => $currentUser])
+            @else
                 <a href="{{ route('detailsPweep', $pweep->id ) }}" style="color: whitesmoke; text-decoration: none;">
                     <p>
                         {{ $pweep->message }}
                     </p>
                     @include('components.img.pweep', ['pweep' => $pweep, 'user' => $currentUser])
                 </a>
-            @else
-                <p>
-                    @if(Route::is('search'))
-                        @foreach(explode(' ', $pweep->message) as $word)
-                            @if($word == $search)
-                                <b><u>{{ $word }}</u></b>
-                            @else
-                                {{ $word }}
-                            @endif
-                        @endforeach
-                    @else
-                        {{ $pweep->message }}
-                    @endif
-                </p>
-                @include('components.img.pweep', ['pweep' => $pweep, 'user' => $currentUser])
             @endif
         </div>
     </div>
