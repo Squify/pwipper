@@ -22,7 +22,7 @@
     <div class="display-flex-row" id="content">
         <div class="col-2">
             @if(!$pweep->initialAuthor)
-                <a href="{{ route('profile') }}">
+                <a href="{{ url('profile', $pweep->author->pseudo) }}">
                     <picture>
                         @if($pweep->author->image_path )
                             <img src="{{ asset('storage/' . $pweep->author->image_path) }}"

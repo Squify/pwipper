@@ -11,7 +11,6 @@
 
             @include('auth.profile.banner', ['user' => $user])
 
-            @if(Route::is('profile'))
                 <ul style="margin-top: 10px; text-align: center;" class="nav nav-tabs col-12" id="myTab" role="tablist">
                     <li class="nav-item col-4">
                         <a class="nav-link active" id="pweep-tab" data-toggle="tab" href="#pweep" aria-controls="pweep"
@@ -26,22 +25,6 @@
                         aria-selected="false">Mentions j'aime</a>
                     </li>
                 </ul>
-            @else
-                <ul style="margin-top: 10px; text-align: center;" class="nav nav-tabs col-12" id="myTab" role="tablist">
-                    <li class="nav-item col-4">
-                        <a class="nav-link active" id="pweep-tab" data-toggle="tab" href="#pweep" aria-controls="pweep"
-                        aria-selected="true">Pweeps</a>
-                    </li>
-                    <li class="nav-item col-4">
-                        <a class="nav-link" id="media-tab" data-toggle="tab" href="#media" aria-controls="media"
-                        aria-selected="false">Médias</a>
-                    </li>
-                    <li class="nav-item col-4">
-                        <a class="nav-link" id="like-tab" data-toggle="tab" href="#like" aria-controls="like"
-                        aria-selected="false">Mentions j'aime</a>
-                    </li>
-                </ul>
-            @endif
         </div>
         <div class="tab-content">
             <div class="tab-pane active pweep-list" id="pweep" role="tabpanel"

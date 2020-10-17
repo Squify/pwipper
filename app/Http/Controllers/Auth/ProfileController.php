@@ -15,7 +15,7 @@ class ProfileController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($pseudo)
     {
         $user = User::findOrFail(Auth::id());
         $currentUser = User::findOrFail(Auth::id());
