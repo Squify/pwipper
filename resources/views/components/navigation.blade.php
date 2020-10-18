@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg ">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
@@ -27,9 +27,7 @@
                         </svg>
                         <span id="notificationsTitle">Notifications</span>
                     </a>
-                    <div class="dropdown-menu" id="notificationsDropdown" aria-labelledby="notificationsTitle">.
-                        <div class="dropdown-item notification-item">No notifications</div>
-                    </div>
+                    @include('components/notifications-list')
                 </li>
 
                 <li class="nav-item">
@@ -93,8 +91,8 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Pas connecté ?
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pas connecté ?
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('login') }}">Connexion</a>
@@ -108,16 +106,17 @@
             @endif
             <form class="form-inline" action="{{route('search')}}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search" name="q"
-                        aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search"
+                           name="q"
+                           aria-describedby="basic-addon1">
                     <div class="input-group-prepend">
                         <span class="input-group-text search-button" id="basic-addon1">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
+                                 xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
-                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                             <path fill-rule="evenodd"
-                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                             </svg>
                         </span>
                     </div>
@@ -126,75 +125,3 @@
         </div>
     </div>
 </nav>
-
-@section('js')
-    <script>
-        $(document).ready(function(){
-
-            //On met généralement des $ en préfix de variable quand ce sont des éléments HTML jQuery (c'est pas obligatoire)
-            var $notificationsTitle = $('#notificationsTitle');
-            var $notificationsDropdown = $('#notificationsDropdown');
-
-            function loadNotifications(){
-                //Récupère le contenu de l'API grace a Ajax de jQuery puis on précise que nous récupérons du JSON via la méthode GET
-                $.ajax({
-                    url:"{{ route('notifications') }}",
-                    method:"GET",
-                    dataType:"json",
-                    success: function(data) {
-                        console.log(data)
-                        $notificationsDropdown.html("");
-                        var nbrNotifs = data.notifications.length;
-
-                        if(nbrNotifs >= 1){
-                            $notificationsTitle.html('Notifications (%s)'.replace(/%s/g, nbrNotifs));
-
-                            data.notifications.forEach(notification => {
-                                $notificationsDropdown.append(`
-                                    <div class="dropdown-item notification-item"><b>${notification.pseudo}</b> ${notification.message}</div>
-                                `);
-                            });
-                        }else{
-                            $notificationsTitle.html('Notifications');
-                            $notificationsDropdown.html('<div class="dropdown-item notification-item">No notifications</div>');
-                        }
-                    },
-                    error: function(err) {
-                        console.error(err);
-                    }
-                });
-            }
-
-            //Envoie a l'API que l'utilisateur a lu les notifications (puis coté backend on met is_read a true sur les notifs)
-            function readNotifications(){
-                $.ajax({
-                    url:"/api/notifications/read",
-                    method:"GET",
-                    dataType:"json",
-                    success: function(data) {
-
-                    },
-                    error: function(err) {
-                        console.error(err);
-                    }
-                });
-            }
-
-            //Quand l'utilisateur clique sur le dropdown des notifications
-            $notificationsDropdown.click(function () {
-                readNotifications();
-
-                return false;
-            });
-
-            //Appel de la function dés le chargement de la page terminé
-            loadNotifications();
-
-            //Défini un interval pour appeler la function loadNotifications() toutes les 5000ms (5 secondes)
-            setInterval(function(){
-                loadNotifications();
-            }, 5000000000);
-            // }, 5000);
-        });
-    </script>
-@endsection

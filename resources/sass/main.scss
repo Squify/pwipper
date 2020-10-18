@@ -5,61 +5,6 @@ $gold-crayola: #efc88bff;
 $banana-mania: #f4e3b2ff;
 $light-gray: #d3d5d7ff;
 
-.navbar {
-    background-color: #0B1116;
-    margin-bottom: 15px;
-    position: fixed;
-    width: 100%;
-    z-index: 999999;
-    height: 75px;
-
-    .nav-link:hover {
-        text-decoration: underline;
-        color: white;
-    }
-}
-
-.search-bar {
-    display: flex;
-    flex-direction: row;
-
-    input {
-        background: #253341;
-        border-color: #253341;
-
-        :active {
-            background: #35495B;
-            border-color: #35495B;
-        }
-    }
-
-    .input-group-prepend:hover {
-        cursor: pointer;
-    }
-
-    .search-button {
-        background: #253341;
-        border-color: #253341;
-        color: whitesmoke;
-    }
-}
-
-.dropdown-menu {
-    background: #253341;
-
-    :hover {
-        background: #35495B;
-        border-color: #35495B;
-    }
-}
-
-.brand {
-    position: absolute;
-    left: 50%;
-    margin-left: -50px !important; /* 50% of your logo width */
-    display: block;
-}
-
 body {
     background-color: #15202B;
     color: whitesmoke;
@@ -76,9 +21,12 @@ body {
     border-radius: 5%;
 }
 
-#navbarToggler {
-    a {
-        color: whitesmoke;
+.dropdown-menu {
+    background: #253341;
+
+    :hover {
+        background: #35495B;
+        border-color: #35495B;
     }
 }
 
