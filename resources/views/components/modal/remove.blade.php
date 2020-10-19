@@ -3,7 +3,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalRemoveLabel">Supprimer le pweep ?</h5>
+                @if(!$pweep->initialAuthor)
+                    <h5 class="modal-title" id="modalRemoveLabel">Supprimer le pweep ?</h5>
+                @else
+                    <h5 class="modal-title" id="modalRemoveLabel">Supprimer le repweep ?</h5>
+                @endif
                 <button style="color: white" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -17,11 +21,21 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label style="text-align: justify"><b>
+                        @if(!$pweep->initialAuthor)
                             Il n'est pas possible d'annuler cette opération. <br>
                             Ce Pweep sera supprimé définitivement du fil d'actualité, de votre profil, et des résultats
                             de recherche Pwipper.</b>
+                        @else
+                            Il n'est pas possible d'annuler cette opération. <br>
+                            Ce repweep sera supprimé de votre fil d'actualité et sur votre profil.</b>
+                        @endif
                     </label><br><br>
-                    <label><u>Le pweep en question</u> : <br>
+                    <label>
+                        @if(!$pweep->initialAuthor)
+                            <u>Le pweep en question</u> : <br>
+                        @else
+                            <u>Le message du repweep</u> : <br>
+                        @endif
                         {{ $pweep->message }}
                     </label><br>
                     @if($pweep->image_path_1 === null)

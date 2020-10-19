@@ -20,9 +20,8 @@ class PweepController
     public function index()
     {
         $user = User::where('id', Auth::id())->first();
-        $pweeps = Pweep::orderBy('created_at', 'DESC')
-            ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false])
+        $pweeps = Pweep::orderBy('updated_at', 'DESC')
+            ->where('is_deleted', false)
             ->get()
             ->all();
         return view('homepage')->with([
@@ -103,7 +102,7 @@ class PweepController
             'is_deleted' => false,
             'author_id' => Auth::id(),
             'created_at' => now(),
-            'updated_at' => null,
+            'updated_at' => now(),
         ]);
         return back();
     }
@@ -278,7 +277,7 @@ class PweepController
         $data = $request->input('q');
         $pweeps = Pweep::where('message', 'rlike', "[[:<:]]" . $data . "[[:>:]]")
             ->orderBy('created_at', 'DESC')
-            ->where(['is_deleted' => false])
+            ->where('is_deleted', false)
             ->get()
             ->all();
 

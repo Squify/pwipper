@@ -21,12 +21,13 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('homepage');
 });
-Route::get('/profile', 'Auth\ProfileController@index')->name('profile')->middleware('auth');
-Route::get('/profile/update', 'Auth\UpdateProfileController@index')->name('updateProfile')->middleware('auth');
-Route::post('/profile/update', 'Auth\UpdateProfileController@updateProfile')->name('updateProfile')->middleware('auth');
-Route::get('/profile/remove', 'Auth\UpdateProfileController@remove')->name('deleteProfile')->middleware('auth');
+Route::get('/profile/{pseudo}', 'Auth\ProfileController@index')->name('profile')->middleware('auth');
+Route::get('/profile/{pseudo}/media', 'Auth\ProfileController@media')->name('mediaProfile')->middleware('auth');
+Route::get('/profile/{pseudo}/likes', 'Auth\ProfileController@likes')->name('likesProfile')->middleware('auth');
 
-Route::get('/profile/{pseudo}', 'Auth\ProfileController@otherUserIndex')->name('profileOther');
+Route::get('/profile/{pseudo}/update', 'Auth\UpdateProfileController@index')->name('updateProfile')->middleware('auth');
+Route::post('/profile/{pseudo}/update', 'Auth\UpdateProfileController@updateProfile')->name('updateProfile')->middleware('auth');
+Route::get('/profile/{pseudo}/remove', 'Auth\UpdateProfileController@remove')->name('deleteProfile')->middleware('auth');
 
 Route::get('/search', 'PweepController@search')->name('search')->middleware('auth');
 

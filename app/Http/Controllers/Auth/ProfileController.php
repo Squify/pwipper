@@ -15,57 +15,56 @@ class ProfileController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($pseudo)
     {
-        $user = User::findOrFail(Auth::id());
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
         $currentUser = User::findOrFail(Auth::id());
         $pweeps = Pweep::where('author_id', $user->id)
             ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false])
+            ->where('is_deleted', false)
             ->get()
             ->all();
-        $medias = Pweep::whereNotNull('image_path_1')
-            ->orderBy('updated_at', 'DESC')
-            ->where(['is_deleted' => false, 'author_id' => $user->id, 'initial_pweep_id' => null])
-            ->get()
-            ->all();
-        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
 
-        return view('auth/profile')->with([
+        return view('auth/profile/pweeps')->with([
             'user' => $user,
             'currentUser' => $currentUser,
             'pweeps' => $pweeps,
-            'medias' => $medias,
-            'likes' => $likes,
         ]);
     }
 
-    /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function otherUserIndex($pseudo)
+    public function media($pseudo)
     {
         $user = User::where('pseudo', $pseudo)->firstOrFail();
-        $currentUser = User::where('id', Auth::id())->first();
-
-        $pweeps = Pweep::where('author_id', $user->id)
-            ->orderBy('created_at', 'DESC')
-            ->where(['is_deleted' => false])
-            ->get()
-            ->all();
+        $currentUser = User::findOrFail(Auth::id());
         $medias = Pweep::whereNotNull('image_path_1')
-            ->where('author_id', $user->id)
-            ->orderBy('created_at', 'DESC')
-            ->where(['is_deleted' => false])
+            ->orderBy('updated_at', 'DESC')
+            ->where([
+                'is_deleted' => false,
+                'author_id' => $user->id,
+                'initial_pweep_id' => null
+            ])
             ->get()
             ->all();
-        $likes = $user->like()->orderByDesc('likes.updated_at')->get();
 
-        return view('auth/profile')->with([
+        return view('auth/profile/media')->with([
             'user' => $user,
             'currentUser' => $currentUser,
-            'pweeps' => $pweeps,
             'medias' => $medias,
+        ]);
+    }
+
+    public function likes($pseudo)
+    {
+        $user = User::where('pseudo', $pseudo)->firstOrFail();
+        $currentUser = User::findOrFail(Auth::id());
+        $likes = $user->like()
+            ->orderByDesc('likes.updated_at')
+            ->where('is_deleted', false)
+            ->get();
+
+        return view('auth/profile/likes')->with([
+            'user' => $user,
+            'currentUser' => $currentUser,
             'likes' => $likes,
         ]);
     }

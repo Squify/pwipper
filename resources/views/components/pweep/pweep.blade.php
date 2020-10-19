@@ -21,22 +21,10 @@
 
     <div class="display-flex-row" id="content">
         <div class="col-2">
-            @if($pweep->initialAuthor)
-                <a href="{{ url('profile', $pweep->initialAuthor->pseudo) }}">
-                    <picture>
-                        @if($pweep->initialAuthor->image_path)
-                            <img src="{{ asset('storage/' . $pweep->initialAuthor->image_path) }}"
-                                class="profile_pic img-fluid rounded-circle img-thumbnail">
-                        @else
-                            <img src="{{ asset('storage/img/no_profile_pic.png') }}"
-                                class="profile_pic img-fluid rounded-circle img-thumbnail">
-                        @endif
-                    </picture>
-                </a>
-            @else
+            @if(!$pweep->initialAuthor)
                 <a href="{{ url('profile', $pweep->author->pseudo) }}">
                     <picture>
-                        @if($pweep->author->image_path)
+                        @if($pweep->author->image_path )
                             <img src="{{ asset('storage/' . $pweep->author->image_path) }}"
                                 class="profile_pic img-fluid rounded-circle img-thumbnail">
                         @else
@@ -45,6 +33,18 @@
                         @endif
                     </picture>
                 </a>
+            @else
+            <a href="{{ url('profile', $pweep->initialAuthor->pseudo) }}">
+                <picture>
+                    @if($pweep->initialAuthor->image_path)
+                        <img src="{{ asset('storage/' . $pweep->initialAuthor->image_path) }}"
+                            class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @else
+                        <img src="{{ asset('storage/img/no_profile_pic.png') }}"
+                            class="profile_pic img-fluid rounded-circle img-thumbnail">
+                    @endif
+                </picture>
+            </a>
             @endif
         </div>
         <div class="col-10">
@@ -64,28 +64,25 @@
                 </div>
                 @include('components.modal.dropdown', ['pweep' => $pweep])
             </div>
-            @if(Route::is('homepage') || Route::is('profile'))
+            @if(Route::is('search'))
+                @foreach(explode(' ', $pweep->message) as $word)
+                <a href="{{ route('detailsPweep', $pweep->id ) }}" style="color: whitesmoke; text-decoration: none;">
+                    @if($word == $search)
+                        <b><u>{{ $word }}</u></b>
+                    @else
+                        {{ $word }}
+                    @endif
+                </a>
+                @endforeach
+                <br>
+                @include('components.img.pweep', ['pweep' => $pweep, 'user' => $currentUser])
+            @else
                 <a href="{{ route('detailsPweep', $pweep->id ) }}" style="color: whitesmoke; text-decoration: none;">
                     <p>
                         {{ $pweep->message }}
                     </p>
                     @include('components.img.pweep', ['pweep' => $pweep, 'user' => $currentUser])
                 </a>
-            @else
-                <p>
-                    @if(Route::is('search'))
-                        @foreach(explode(' ', $pweep->message) as $word)
-                            @if($word == $search)
-                                <b><u>{{ $word }}</u></b>
-                            @else
-                                {{ $word }}
-                            @endif
-                        @endforeach
-                    @else
-                        {{ $pweep->message }}
-                    @endif
-                </p>
-                @include('components.img.pweep', ['pweep' => $pweep, 'user' => $currentUser])
             @endif
         </div>
     </div>
