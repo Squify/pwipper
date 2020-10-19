@@ -17,7 +17,7 @@ class NotificationController extends Controller
 
         if (Auth::id()) {
             $notifications = Notification::where('receiver_id', Auth::id())
-                ->orderBy('updated_at', 'DESC')
+                ->orderBy('created_at', 'desc')
                 ->get()
                 ->all();
 
@@ -52,6 +52,8 @@ class NotificationController extends Controller
             'pweep_id' => $pweepId,
             'type_id' => $typeId,
             'is_read' => false,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 

@@ -52,7 +52,7 @@
                                     $notificationsDropdown.append(`
                                     <div class="display-flex-column notification" id="${notification.pweep_id}" name="${notification.notification_id}">
                                         <a style="color: ghostwhite!important;" class="dropdown-item notification-item">
-                                            <svg style="color: #007bff" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                               <circle cx="8" cy="8" r="8"/>
                                             </svg>
                                             <b>${notification.pseudo}</b> ${notification.message}
