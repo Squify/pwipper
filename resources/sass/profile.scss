@@ -9,12 +9,11 @@
 
         .nav-item {
             padding: 0;
+            border: unset;
 
             a {
                 color: #8393A1;
             }
-
-            border: unset;
 
             :hover {
                 background-color: #162D40;

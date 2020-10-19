@@ -132,6 +132,8 @@ class PweepController
             $initialPweep = Pweep::where('id', $sendPweepToRepweep->initial_pweep_id)->first();
         else $initialPweep = null;
 
+        $notificationController = new NotificationController();
+
         $exists = Pweep::where('author_id', Auth::id())
             ->where('initial_pweep_id', $initialPweep ? $initialPweep->id : $sendPweepToRepweep->id)
             ->exists();
@@ -161,6 +163,13 @@ class PweepController
                 $deletedPweep->repweep_counter = $sendPweepToRepweep->repweep_counter;
                 $deletedPweep->timestamps = false;
                 $deletedPweep->save();
+
+                $notificationController->createNotification(
+                    $initialPweep ? $initialPweep->author->id : $sendPweepToRepweep->author->id,
+                    Auth::id(),
+                    $deletedPweep->id,
+                    2
+                );
             }
         } else {
             $sendPweepToRepweep->repweep_counter += 1;
@@ -192,6 +201,13 @@ class PweepController
             }
             $pweep->timestamps = false;
             $pweep->save();
+
+            $notificationController->createNotification(
+                $initialPweep ? $initialPweep->author->id : $sendPweepToRepweep->author->id,
+                Auth::id(),
+                $pweep->id,
+                2
+            );
         }
 
         return back();
@@ -203,24 +219,26 @@ class PweepController
     public function like($pweepId)
     {
         $user = User::findOrFail(Auth::id());
-        $pweep = Pweep::where('id', $pweepId)->firstOrFail();
-        if ($pweep->initial_pweep_id)
-            $initialPweep = Pweep::where('id', $pweep->initial_pweep_id)->first();
-        else $initialPweep = null;
+        $pweepToLike = Pweep::where('id', $pweepId)->firstOrFail();
+        if ($pweepToLike->initial_pweep_id)
+            $initialPweepToLike = Pweep::where('id', $pweepToLike->initial_pweep_id)->first();
+        else $initialPweepToLike = null;
 
-        $repweeps = Pweep::where(['initial_pweep_id' => $initialPweep ? $initialPweep->id : $pweep->id])
+        $notificationController = new NotificationController();
+
+        $repweeps = Pweep::where(['initial_pweep_id' => $initialPweepToLike ? $initialPweepToLike->id : $pweepToLike->id])
             ->get()
             ->all();
 
-        if ($user->like->contains($pweep)) {
-            $user->like()->detach($pweep);
-            $pweep->like_counter -= 1;
-            $pweep->timestamps = false;
-            $pweep->save();
-            if ($initialPweep) {
-                $initialPweep->like_counter -= 1;
-                $initialPweep->timestamps = false;
-                $initialPweep->save();
+        if ($user->like->contains($pweepToLike)) {
+            $user->like()->detach($pweepToLike);
+            $pweepToLike->like_counter -= 1;
+            $pweepToLike->timestamps = false;
+            $pweepToLike->save();
+            if ($initialPweepToLike) {
+                $initialPweepToLike->like_counter -= 1;
+                $initialPweepToLike->timestamps = false;
+                $initialPweepToLike->save();
             }
             foreach ($repweeps as $repweep) {
                 $repweep->like_counter -= 1;
@@ -228,20 +246,26 @@ class PweepController
                 $repweep->save();
             }
         } else {
-            $user->like()->attach($pweep);
-            $pweep->like_counter += 1;
-            $pweep->timestamps = false;
-            $pweep->save();
-            if ($initialPweep) {
-                $initialPweep->like_counter += 1;
-                $initialPweep->timestamps = false;
-                $initialPweep->save();
+            $user->like()->attach($pweepToLike);
+            $pweepToLike->like_counter += 1;
+            $pweepToLike->timestamps = false;
+            $pweepToLike->save();
+            if ($initialPweepToLike) {
+                $initialPweepToLike->like_counter += 1;
+                $initialPweepToLike->timestamps = false;
+                $initialPweepToLike->save();
             }
             foreach ($repweeps as $repweep) {
                 $repweep->like_counter += 1;
                 $repweep->timestamps = false;
                 $repweep->save();
             }
+            $notificationController->createNotification(
+                $initialPweepToLike ? $initialPweepToLike->author->id : $pweepToLike->author->id,
+                Auth::id(),
+                $initialPweepToLike ? $initialPweepToLike->id : $pweepToLike->id,
+                1
+            );
         }
 
         $user->save();

@@ -1,10 +1,8 @@
 .main-container {
-    margin-left: 25%;
-    margin-right: 25%;
+    margin: 0 25% 0 25%;
 
     .new-pweep {
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px 0 15px 0;
         display: flex;
         flex-direction: row;
 
@@ -30,8 +28,7 @@
     }
 
     .pweep {
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 15px 0 15px 0;
     }
 
     .dropdown {
@@ -80,4 +77,25 @@
     background-color: transparent;
     border: unset;
     object-fit: cover;
+}
+
+@media (max-width: 980px) {
+    .main-container {
+        margin: 0 15% 0 15%;
+    }
+}
+
+@media (max-width: 980px) {
+    .main-container {
+        margin: 0 10% 0 10%;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-container {
+        margin: 0;
+    }
+    .container-fluid {
+        margin: 0;
+    }
 }

@@ -1,5 +1,5 @@
 .icons-pweep {
-    display:flex;
+    display: flex;
     flex-direction: row;
     text-align: center;
     justify-content: space-between;
@@ -27,7 +27,8 @@
 
 .white {
     color: whitesmoke;
-    :hover{
+
+    :hover {
         text-decoration: underline;
         color: whitesmoke;
     }

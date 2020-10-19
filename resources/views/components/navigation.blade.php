@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg ">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarToggler">
@@ -16,26 +16,31 @@
                     Accueil
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link"  href="#">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                    </svg>
-                    Notifications
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-square-dots-fill"
-                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                              d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                    </svg>
-                    Messages
-                </a>
-            </li>
+            @if(Auth::check())
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell-fill" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                        <span id="notificationsTitle">Notifications</span>
+                    </a>
+                    @include('components/notifications-list')
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-square-dots-fill"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                        </svg>
+                        Messages
+                    </a>
+                </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hash" fill="currentColor"
@@ -86,8 +91,8 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Pas connecté ?
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Pas connecté ?
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('login') }}">Connexion</a>
@@ -101,16 +106,17 @@
             @endif
             <form class="form-inline" action="{{route('search')}}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search" name="q"
-                        aria-describedby="basic-addon1">
+                    <input type="text" class="form-control" placeholder="Rechercher sur Pwipper" aria-label="search"
+                           name="q"
+                           aria-describedby="basic-addon1">
                     <div class="input-group-prepend">
                         <span class="input-group-text search-button" id="basic-addon1">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
+                                 xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
-                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                  d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                             <path fill-rule="evenodd"
-                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                  d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                             </svg>
                         </span>
                     </div>
