@@ -37,9 +37,21 @@ class PweepController
     {
         $currentUser = User::findOrFail(Auth::id());
         $pweep = Pweep::where('id', $id)->firstOrFail();
+        $responseId = $pweep->response_initial_pweep_id;
+        $responseAll = Pweep::where('response_initial_pweep_id', $responseId = $pweep->id )->get()->all();
+        if(!empty($responseAll)) {
+            foreach($responseAll as $response) {
+                $responsePweepId[] = Pweep::where('id',  $response['id'])->firstOrFail();
+            }
+        }
+        else {
+            $responsePweepId = null;
+        }
         return view('components/pweep/detailsPweep')->with([
             'pweep' => $pweep,
             'currentUser' => $currentUser,
+            'responseId' => $responseId,
+            'responsePweepId' => $responsePweepId,
         ]);
     }
 
@@ -55,6 +67,7 @@ class PweepController
 
         $pweep->is_deleted = true;
         $pweep->repweep_counter -= 1;
+        $pweep->response_counter -= 1;
         $pweep->timestamps = false;
         $pweep->save();
 
@@ -286,5 +299,61 @@ class PweepController
             'user' => $user,
             'search' => $data,
         ]);
+    }
+
+    /**
+     * Response pweep
+     */
+    public function response($pweepId)
+    {
+        $currentUser = User::findOrFail(Auth::id());
+        $pweepId = Pweep::where('id', $pweepId)->firstOrFail();
+
+        return view('components/pweep/responsePweep')->with([
+            'pweep' => $pweepId,
+            'currentUser' => $currentUser,
+        ]);
+    }
+
+    /**
+     * Response pweep post
+     */
+    public function responsePost(StorePweepRequest $request, $pweepId)
+    {
+        $notificationController = new NotificationController();
+        $pweepId = Pweep::where('id', $pweepId)->firstOrFail();
+        $data = $request->input();
+        $pweepId->response_counter += 1;
+        $pweepId->save();
+
+        if ($request->file('images')) {
+            foreach ($request->file('images') as $image) {
+                if (!empty($image)) {
+                    $name = $image->getClientOriginalName();
+                    $image->move(public_path() . '/img/pweep/', $name);
+                    $listImage[] = $name;
+                }
+            }
+        }
+
+        for ($i = 0; $i < 4; $i++) {
+            if (empty($listImage[$i])) {
+                $listImage[$i] = null;
+            }
+        }
+
+        Pweep::insert([
+            'image_path_1' => $listImage[0] ? 'pweep/' . $listImage[0] : null,
+            'image_path_2' => $listImage[1] ? 'pweep/' . $listImage[1] : null,
+            'image_path_3' => $listImage[2] ? 'pweep/' . $listImage[2] : null,
+            'image_path_4' => $listImage[3] ? 'pweep/' . $listImage[3] : null,
+            'message' => $data['message'],
+            'is_deleted' => false,
+            'author_id' => Auth::id(),
+            'created_at' => now(),
+            'updated_at' => now(),
+            'response_initial_pweep_id' => $pweepId['id'],
+        ]);
+        return redirect()->route('homepage');
     }
 }

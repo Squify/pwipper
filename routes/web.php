@@ -44,6 +44,9 @@ Route::post('/pweep', 'PweepController@store')->name('storePweep')->middleware('
 Route::get('/pweep/details/{id}', 'PweepController@details')->name('detailsPweep')->middleware('auth');
 Route::get('/pweep/{id}', 'PweepController@remove')->name('deletePweep')->middleware('auth');
 Route::post('/pweep/{id}', 'PweepController@update')->name('updatePweep')->middleware('auth');
+Route::get('/pweep/response/{id}', 'PweepController@response')->name('responsePweep')->middleware('auth');
+Route::post('/pweep/response/{id}', 'PweepController@responsePost')->name('responsePweepPost')->middleware('auth');
+
 Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep')->middleware('auth');
 Route::get('/pweep/repweep/{id}', 'PweepController@repweep')->name('repweep')->middleware('auth');
 

@@ -17,7 +17,8 @@ class Pweep extends Model
         'initial_pweep_id',
         'initial_author_id',
         'repweep_counter',
-        'like_counter'
+        'like_counter',
+        'response_initial_pweep_id'
     ];
 
     public function author()
