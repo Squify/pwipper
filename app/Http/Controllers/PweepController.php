@@ -318,13 +318,13 @@ class PweepController
     /**
      * Response pweep post
      */
-    public function responsePost(StorePweepRequest $request, $pweepId)
+    public function responsePost(StorePweepRequest $request, $pweep)
     {
         $notificationController = new NotificationController();
-        $pweepId = Pweep::where('id', $pweepId)->firstOrFail();
+        $pweep = Pweep::where('id', $pweep)->firstOrFail();
         $data = $request->input();
-        $pweepId->response_counter += 1;
-        $pweepId->save();
+        $pweep->response_counter += 1;
+        $pweep->save();
 
         if ($request->file('images')) {
             foreach ($request->file('images') as $image) {
@@ -352,8 +352,16 @@ class PweepController
             'author_id' => Auth::id(),
             'created_at' => now(),
             'updated_at' => now(),
-            'response_initial_pweep_id' => $pweepId['id'],
+            'response_initial_pweep_id' => $pweep->id,
         ]);
+
+        $notificationController->createNotification(
+            $pweep->author->id,
+            Auth::id(),
+            $pweep->id,
+            3
+        );
+
         return redirect()->route('homepage');
     }
 }

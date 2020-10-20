@@ -1,61 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## À propos de Pwipper
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Pwipper est une application web unique et innovante. 
+Ce site a été développé pour mettre en relation des utilisateurs à travers le monde 
+et créer une communauté soudée et bienveillante.   <br>
+Les utilisateurs peuvent y poster des messages (pweeps), et voir le profil des autres utilisateurs.
+Un pweep peut contenir jusqu'à 4 images. Pour les insérer : soit cliquer 
+sur une image pour l'ajouter, ou cliquer sur la touche `Ctrl` pour en sélectionner plusieurs.<br><br>
 
-## About Laravel
+Un utilisateur peut aimer ou repweeper un pweep. Lorsqu'il aime un pweep il est ajouté dans une liste.
+Quand il est repweepé, le pweep est recréé pour être repartagé et éventuellement lui donner
+plus de visibilité (car il réapparait tout en haut de la liste des pweeps).
+Un utilisateur peut également répondre à un pweep.<br><br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sur le profil d'un utilisateur on peut voir 3 catégories de listes : pweeps, médias, mentions j'aime. 
+Les pweeps sont tous les messages créés ou repweepé par l'utilisateur, les médias, seulement les 
+pweeps contenant des images, et les mentions j'aime sont la liste des pweeps aimé par l'utilisateur.<br><br>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Une liste des notifications est présente dans la barre de navigation permettant à l'utilisateur de voir
+les dernières personnes qui ont aimé, repweepé, ou répondu à ses pweeps.<br><br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Un administrateur peut accéder à un panel d'administration sur lequel il pourra gérer plusieurs entités :<br>
+- les utilisateurs : l'administrateur voit une liste détaillée de tous les utilisateurs, ainsi que des actions
+qu'il peut réaliser par rapport à lui (le modifier, supprimer) et peut également en créer de nouveaux
+- les pweeps : il est possible pour un administrateur de voir la liste détaillée des pweeps, et également de 
+les modifier ou de les supprimer
+- les notifications : un tableau détaillé des notifications et également présent. L'administrateur peut les supprimer.
 
-## Learning Laravel
+### Technologies utilisées
+- Laravel 7
+- Bootstrap 
+- JS et JQuery 
+- MySQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Comment lancer le projet
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<ol>
+    <li>Créer une base de données <code>pwipper</code> avec comme utilisateur <code>root</code> et aucun mot de passe </li>
+    <li>
+        Éditer le fichier `.env` qui se trouve à la racine : <br>
+            DB_CONNECTION=mysql <br>
+            DB_HOST=127.0.0.1 <br>
+            DB_PORT=3306 <br>
+            DB_DATABASE=pwipper <br>
+            DB_USERNAME=root <br>
+            DB_PASSWORD= <br><br>
+            MAIL_MAILER=smtp<br>
+            MAIL_HOST=smtp.mailtrap.io<br>
+            MAIL_PORT=2525<br>
+            MAIL_USERNAME={ username }<br>
+            MAIL_PASSWORD={ password }<br>
+            MAIL_ENCRYPTION=tls<br>
+    </li>
+    <li>Lancer la commande `npm install` dans un terminal</li>
+    <li>Lancer la commande `php artisan serve` dans un terminal</li>
+    <li>Lancer la commande `npm run watch` dans un terminal</li>
+    <li>Lancer la commande `php artisan migrate:fresh --seed` dans un terminal</li>
+</ol> 
 
-## Laravel Sponsors
+## Évolutions futures
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Dans le futur, il est prévu que de nouvelles fonctionnalités voient le jour : 
+- Un système de messagerie interne, pour que les utilisateurs puissent communiquer entre eux de manière privée
+- Un système de tag
+- Des catégories d'utilisateur pour différencier un compte privé, d'un compte lifestyle, de sport, qui parle de cuisine ou autre
+- Amélioration du visuel des mails envoyés lors des différentes interactions
+- Un système de suivi d'un autre utilisateur : un utilisateur pourrait en suivre un autre et cela personnaliserait sa page d'accueil et les pweeps qu'il verrait en premier
+- Une page affichant les 10 mots les plus utilisés sur le site
+- Les tableaux pourront être paginés et triés 
 
-### Premium Partners
+## Difficultés rencontrées
+Lors de ce projet, plusieurs difficultés nous on barré la route. <br>
+Dans un premier temps, nous n'avions pas énormément de connaissances sur les langages utilisés, qui ont été imposés.
+En effet, avec seulement une semaine de cours sur le Laravel, il a été difficile de tout voir, et il nous a manqué certaines
+notions qui nous auraient permis de développer plus efficacement le site (notamment les liaisons Many-To-Many).<br>
+Ensuite, nous avons dû utiliser du JS et JQuery, qui sont des langages que nous ne connaissions pas avant.<br><br>
+Finalement, étant en alternance, il a fallu trouvé du temps et de la motivation après le travail pour avancer le projet
+et le mener à bout. Ce n'est pas évident quand on vient de passer 7H30 à travailler de rentrer et de se poser
+pour continuer à travailler.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Points positifs
+Malgré les difficultés auxquelles nous avons fait face, nous avons réussi à terminer la plupart des fonctionnalit&s
+que nous souhaitions présenter, et elles fonctionnent bien. <br>
+Le fait d'avoir travaillé 3 semaines sur ce projet nous a permis d'améliorer nos compétences dans les langages utilisés.
