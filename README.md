@@ -88,3 +88,8 @@ pour continuer à travailler.
 Malgré les difficultés auxquelles nous avons fait face, nous avons réussi à terminer la plupart des fonctionnalit&s
 que nous souhaitions présenter, et elles fonctionnent bien. <br>
 Le fait d'avoir travaillé 3 semaines sur ce projet nous a permis d'améliorer nos compétences dans les langages utilisés.
+
+### Organisation du travail
+Au tout début du projet, nous avons mis en place un [board Trello](https://trello.com/b/SuUtTYg5/projet) pour organiser nos idées et les tâches à réaliser. Cela nous a permis de savoir
+ce qui avait été fait ou non, voir si le projet était dans les temps ou non, et qui avait réalisé quelle tâche.
+Pour communiquer nous avons utilisé Discord.
