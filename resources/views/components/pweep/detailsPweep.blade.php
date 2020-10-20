@@ -16,6 +16,11 @@
         </div>
 
         @include('components.pweep.pweep', ['pweep' => $pweep, 'user' => $currentUser])
+        @if($responsePweepId !== null)
+            @foreach($responsePweepId as $response)
+                @include('components.pweep.pweep', ['pweep' => $response, 'user' => $currentUser])
+            @endforeach
+        @endif
         <div class="grey-thin-border"></div>
     </div>
 @endsection
