@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,7 +15,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'pseudo',
+        'description',
+        'image_path',
+        'banner_path',
+        'location',
+        'website',
+        'birthdate',
+        'isAdmin'
     ];
 
     /**
@@ -36,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function like()
+    {
+        return $this->belongsToMany('App\Pweep', 'likes', 'user_id', 'pweep_id')->withTimestamps();
+    }
 }

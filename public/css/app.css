@@ -1,0 +1,365 @@
+/* SCSS HEX */
+
+body {
+  background-color: #15202B;
+  color: whitesmoke;
+}
+
+.base-container {
+  padding-top: 74px;
+}
+
+.modal-content {
+  color: white;
+  padding-top: 40px;
+  background-color: #35495B;
+  border-radius: 5%;
+}
+
+.dropdown-menu {
+  background: #253341;
+}
+
+.dropdown-menu :hover {
+  background: #35495B;
+  border-color: #35495B;
+}
+
+.display-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.display-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background-color: #0B1116;
+  margin-bottom: 15px;
+  position: fixed;
+  width: 100%;
+  z-index: 999999;
+  height: 75px;
+}
+
+.navbar .nav-link:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler {
+  border-color: whitesmoke;
+}
+
+.brand {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px !important;
+  /* 50% of your logo width */
+  display: block;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-bar input {
+  background: #253341;
+  border-color: #253341;
+}
+
+.search-bar input :active {
+  background: #35495B;
+  border-color: #35495B;
+}
+
+.search-bar .input-group-prepend:hover {
+  cursor: pointer;
+}
+
+.search-bar .search-button {
+  background: #253341;
+  border-color: #253341;
+  color: whitesmoke;
+}
+
+#navbarToggler a {
+  color: whitesmoke;
+}
+
+.navbar-collapse.show {
+  background-color: #0b1116;
+  padding: 10px;
+}
+
+.main-container {
+  margin: 0 25% 0 25%;
+}
+
+.main-container .new-pweep {
+  padding: 15px 0 15px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.main-container .new-pweep textarea {
+  min-height: 75px;
+  background-color: transparent;
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.main-container .image-upload > input {
+  display: none;
+}
+
+.main-container .divider-section {
+  height: 10px;
+  background-color: #253341;
+}
+
+.main-container .hover:hover {
+  background-color: #27303a;
+}
+
+.main-container .pweep {
+  padding: 15px 0 15px 0;
+}
+
+.main-container .dropdown {
+  color: whitesmoke;
+}
+
+.main-container .dropdown .dropdown-menu {
+  background: #253341;
+}
+
+.main-container .dropdown .dropdown-menu a {
+  color: whitesmoke;
+}
+
+.main-container .dropdown .dropdown-menu :hover {
+  background: #35495B;
+  border-color: #35495B;
+}
+
+.main-container .pweep-list .pweep {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.grey-thin-border {
+  border-left: 1px solid #38444D;
+  border-right: 1px solid #38444D;
+  border-top: 1px solid #38444D;
+}
+
+.profile_pic_nav {
+  height: 3em;
+  width: 3em;
+  background-color: transparent;
+  border: unset;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.profile_pic {
+  height: 5em;
+  width: 5em;
+  background-color: transparent;
+  border: unset;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 980px) {
+  .main-container {
+    margin: 0 15% 0 15%;
+  }
+}
+
+@media (max-width: 980px) {
+  .main-container {
+    margin: 0 10% 0 10%;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-container {
+    margin: 0;
+  }
+
+  .container-fluid {
+    margin: 0;
+  }
+}
+
+.form-card {
+  background-color: #35495B;
+  border: #35495B;
+  margin-top: 5%;
+}
+
+.form-card .card-header {
+  background-color: #253341;
+}
+
+.profile-container p {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+  -webkit-margin-after: 0;
+          margin-block-end: 0;
+}
+
+.profile-container .nav-tabs {
+  border: unset;
+}
+
+.profile-container .nav-tabs .nav-item {
+  padding: 0;
+  border: unset;
+}
+
+.profile-container .nav-tabs .nav-item a {
+  color: #8393A1;
+}
+
+.profile-container .nav-tabs .nav-item :hover {
+  background-color: #162D40;
+  color: #1DA1F2;
+  border: unset;
+}
+
+.profile-container .nav-tabs .nav-item .active {
+  color: #1DA1F2;
+  font-weight: bold;
+  border-bottom: 3px solid #1DA1F2;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  background: unset;
+  border: unset;
+}
+
+.profile-pic-container {
+  height: 142px;
+  width: 142px;
+  position: relative;
+  top: -80px;
+  margin-bottom: -75px;
+}
+
+.profile-pic {
+  height: 142px;
+  width: 142px;
+  border: unset;
+  background: #15202B;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.icons-pweep {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+  padding: 10px 15% 0 15%;
+}
+
+.icons-pweep .white {
+  color: whitesmoke;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  text-align: end;
+  justify-content: flex-end;
+  width: -moz-available;
+  margin-right: 15px;
+}
+
+.repweep {
+  margin: 0 0 5px 15%;
+  color: #6C757D;
+  min-width: 60%;
+}
+
+.white {
+  color: whitesmoke;
+}
+
+.white :hover {
+  text-decoration: underline;
+  color: whitesmoke;
+}
+
+.notification-dropdown {
+  height: 485px;
+  overflow: scroll;
+  text-overflow: ellipsis;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+
+.notification-dropdown::-webkit-scrollbar {
+  display: none;
+}
+
+.notification .notification-item {
+  color: #BBBBC3 !important;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.notification .notification-item svg {
+  margin-right: 10px;
+  width: 10px;
+  height: 10px;
+}
+
+.notification .notification-preview {
+  color: #BBBBC3 !important;
+  width: 250px;
+  margin: 4px 12px 8px 24px;
+  padding: unset;
+  background: rgba(53, 73, 91, 0.4);
+}
+
+.notification .notification-preview .notification-preview-body {
+  padding: 2px;
+}
+
+.notification:hover .notification-item {
+  color: ghostwhite !important;
+  background: #35495B;
+  border-color: #35495B;
+}
+
+.notification:hover .notification-preview {
+  color: ghostwhite !important;
+  background: #445b72;
+  border-color: #445b72;
+}
+
+.notification:hover .notification-preview :hover {
+  color: ghostwhite !important;
+  background: #445b72;
+  border-color: #445b72;
+}
+
