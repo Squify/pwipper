@@ -21,6 +21,12 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('homepage');
 });
+
+Route::get('/admin/users', 'AdminController@users')->name('adminUsers')->middleware('auth');
+Route::post('/admin/users/create', 'AdminController@create')->name('adminCreate')->middleware('auth');
+Route::get('/admin/pweeps', 'AdminController@pweeps')->name('adminPweeps')->middleware('auth');
+Route::get('/admin/notifications', 'AdminController@notifications')->name('adminNotifications')->middleware('auth');
+
 Route::get('/profile/{pseudo}', 'Auth\ProfileController@index')->name('profile')->middleware('auth');
 Route::get('/profile/{pseudo}/media', 'Auth\ProfileController@media')->name('mediaProfile')->middleware('auth');
 Route::get('/profile/{pseudo}/likes', 'Auth\ProfileController@likes')->name('likesProfile')->middleware('auth');
@@ -42,4 +48,5 @@ Route::get('/pweep/like/{id}', 'PweepController@like')->name('likePweep')->middl
 Route::get('/pweep/repweep/{id}', 'PweepController@repweep')->name('repweep')->middleware('auth');
 
 Route::get('/notifications', 'NotificationController@index')->name('notifications')->middleware('auth');
-Route::get('/notifications/read/{id}', 'NotificationController@readNotification')->name('readNotification')->middleware('auth');
+Route::get('/notifications/delete/{id}', 'NotificationController@remove')->name('deleteNotification')->middleware('auth');
+Route::get('/notifications/read/{id}', 'NotificationController@read')->name('readNotification')->middleware('auth');

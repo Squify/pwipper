@@ -3,7 +3,7 @@
 @section('content')
     <div class="main-container profile-container">
         <div class="grey-thin-border">
-            @include('auth.profile.banner', ['user' => $user])
+            @include('auth.profile.informations', ['user' => $user])
             <ul style="margin-top: 10px; text-align: center;" class="nav nav-tabs col-12" id="myTab" role="tablist">
                 <li class="nav-item col-4">
                     <a class="nav-link" href="{{ url('profile', $user->pseudo) }}">Pweeps</a>

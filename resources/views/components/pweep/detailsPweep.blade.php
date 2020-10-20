@@ -1,6 +1,7 @@
 @extends('layouts/base')
 
 @section('content')
+    @if(Auth::user()->isAdmin || !$pweep->is_deleted)
     <div class="main-container">
         <div class="new-pweep grey-thin-border" style="display: flex; ">
             <div style="margin-left: 10px;">
@@ -11,11 +12,14 @@
                 </a>
             </div>
             <div style="margin-left: 10px;">
-                Pweeper
+                Pweep
             </div>
         </div>
 
         @include('components.pweep.pweep', ['pweep' => $pweep, 'user' => $currentUser])
         <div class="grey-thin-border"></div>
     </div>
+    @else
+        @include('components.error.restrict')
+    @endif
 @endsection

@@ -43,16 +43,22 @@
                                 <button type="submit" class="btn btn-primary">Pweeper</button>
                             </div>
                         </div>
-                        @include('components.errors')
+                        @include('components.error.errors')
                     </form>
                 </div>
             </div>
             <div class="divider-section grey-thin-border"></div>
         @endif
         <div class="pweep-list">
-            @foreach($pweeps as $pweep)
-                @include('components.pweep.pweep', ['pweep' => $pweep, 'currentUser' => $user])
-            @endforeach
+            @if(sizeof($pweeps) > 0)
+                @foreach($pweeps as $pweep)
+                    @include('components.pweep.pweep', ['pweep' => $pweep, 'currentUser' => $user])
+                @endforeach
+            @else
+                <div class="pweep grey-thin-border" style="text-align: center;">
+                    <p>Aucun pweep pour le moment</p>
+                </div>
+            @endif
         </div>
         <div class="grey-thin-border"></div>
     </div>

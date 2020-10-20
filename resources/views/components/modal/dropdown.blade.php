@@ -1,4 +1,4 @@
-@if (Auth::check() && Auth::id() === $pweep->author_id)
+@if ((Auth::check() && Auth::id() === $pweep->author_id) || (Auth::check() && Auth::user()->isAdmin))
     <div class="right">
         <div class="dropdown">
             <button style="color: white" class="btn" type="button" id="dropdownMenuButton"
@@ -11,14 +11,14 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @if(!$pweep->initialAuthor)
-                    <a class="dropdown-item" data-toggle="modal" 
+                    <a class="dropdown-item" data-toggle="modal"
                         href="#updatePweep{{$pweep->id}}">Éditer</a>
                 @endif
-                    <a class="dropdown-item" data-toggle="modal" 
+                    <a class="dropdown-item" data-toggle="modal"
                         href="#deletePweep{{$pweep->id}}">Supprimer</a>
             </div>
-            @include('components.modal.edit', ['pweep' => $pweep])
-            @include('components.modal.remove', ['pweep' => $pweep])
+            @include('components.modal.edit-pweep', ['pweep' => $pweep])
+            @include('components.modal.remove-pweep', ['pweep' => $pweep])
         </div>
     </div>
 @endif

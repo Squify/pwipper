@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="main-container">
-        @include('components.errors')
+        @include('components.error.errors')
         <h2 style="margin-top: 20px; margin-bottom: 20px;"> Recherche : "{{$search}}" </h2>
         <div class="grey-thin-border"></div>
             <div class="pweep-list">

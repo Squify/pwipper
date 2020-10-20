@@ -82,7 +82,7 @@
                                 </button>
                             </div>
                         </div>
-                        <small>*un mail vous sera envoyé<small>
+                        <small>*un mail vous sera envoyé</small>
                     </form>
                 </div>
             </div>
