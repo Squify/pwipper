@@ -41,9 +41,7 @@ class PweepController
         $responseAll = Pweep::where('response_initial_pweep_id', $responseId = $pweep->id )->get()->all();
         if(!empty($responseAll)) {
             foreach($responseAll as $response) {
-                if($response !== null) {
-                    $responsePweepId[] = Pweep::where('id',  $response['id'])->firstOrFail();
-                }
+                $responsePweepId[] = Pweep::where('id',  $response['id'])->firstOrFail();
             }
         }
         else {
@@ -69,6 +67,7 @@ class PweepController
 
         $pweep->is_deleted = true;
         $pweep->repweep_counter -= 1;
+        $pweep->response_counter -= 1;
         $pweep->timestamps = false;
         $pweep->save();
 
@@ -321,8 +320,11 @@ class PweepController
      */
     public function responsePost(StorePweepRequest $request, $pweepId)
     {
+        $notificationController = new NotificationController();
         $pweepId = Pweep::where('id', $pweepId)->firstOrFail();
         $data = $request->input();
+        $pweepId->response_counter += 1;
+        $pweepId->save();
 
         if ($request->file('images')) {
             foreach ($request->file('images') as $image) {
