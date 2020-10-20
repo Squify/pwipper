@@ -324,6 +324,7 @@ class PweepController
         $pweep = Pweep::where('id', $pweep)->firstOrFail();
         $data = $request->input();
         $pweep->response_counter += 1;
+        $pweep->timestamps = false;
         $pweep->save();
 
         if ($request->file('images')) {
