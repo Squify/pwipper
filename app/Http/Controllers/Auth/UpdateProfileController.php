@@ -4,14 +4,13 @@
 namespace App\Http\Controllers\Auth;
 
 
-use App\User;
-use App\Pweep;
-use App\Mail\DeleteMail;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateUserRequest;
+use App\Mail\DeleteMail;
+use App\Pweep;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Requests\UpdateUserRequest;
 
 class UpdateProfileController extends Controller
 {
@@ -34,6 +33,7 @@ class UpdateProfileController extends Controller
     {
         $params = $request->validated();
         $user = User::where('pseudo', $pseudo)->firstOrFail();
+
         if (isset($params['image_path'])) {
             if (($params['image_path'] !== null) && ($params['image_path'] !== $user->image_path)) {
                 Storage::delete('public/' . $user->image_path);
@@ -71,13 +71,13 @@ class UpdateProfileController extends Controller
         }
 
         if ($user->image_path)
-        Storage::delete('public/' . $user->image_path);
+            Storage::delete('public/' . $user->image_path);
         if ($user->banner_path)
-        Storage::delete('public/' . $user->banner_path);
+            Storage::delete('public/' . $user->banner_path);
 
         Mail::to($user->email)->send(new DeleteMail($user));
 
         $user->delete();
-        return back();
+        return redirect()->route('homepage');
     }
 }

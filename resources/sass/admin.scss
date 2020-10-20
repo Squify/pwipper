@@ -1,0 +1,29 @@
+.admin-container {
+    margin: 15px 5% 0 5%;
+
+    .table {
+        background-color: #253341;
+    }
+}
+
+.floating-button {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+
+// Table border color
+table.table-bordered {
+    border: 1px solid #35495b;
+    margin-top: 20px;
+}
+
+table.table-bordered > thead > tr > th {
+    border: 1px solid #35495b;
+}
+
+table.table-bordered > tbody > tr > td {
+    border: 1px solid #35495b;
+}
+
+//End table border color

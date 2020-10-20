@@ -57,7 +57,7 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function readNotification(int $notifId)
+    public function read(int $notifId)
     {
         $notification = Notification::where('id', $notifId)->first();
         if ($notification->is_read == false) {
@@ -65,5 +65,12 @@ class NotificationController extends Controller
             $notification->timestamps = false;
             $notification->save();
         }
+    }
+
+    public function remove(int $notifId)
+    {
+        $notification = Notification::where('id', $notifId)->firstOrFail();
+        $notification->delete();
+        return back();
     }
 }

@@ -74,7 +74,7 @@
                             });
                         } else {
                             $notificationsTitle.html('Notifications');
-                            $notificationsDropdown.html('<div class="dropdown-item notification-item">No notifications</div>');
+                            $notificationsDropdown.html('<div style="color: ghostwhite!important;" class="dropdown-item notification-item">No notifications</div>');
                         }
                     },
                     error: function (err) {
