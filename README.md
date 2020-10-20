@@ -56,6 +56,12 @@ les modifier ou de les supprimer
     <li>Lancer la commande `npm run watch` dans un terminal</li>
     <li>Lancer la commande `php artisan migrate:fresh --seed` dans un terminal</li>
 </ol> 
+<br>
+
+Pour se connecter aux utilisateurs déjà en base de données : 
+- email : `test1@test.fr` / mot de passe : `Test123!` / Simple utilisateur
+- email : `test2@test.fr` / mot de passe : `Test123!` / Simple utilisateur
+- email : `admin@test.fr` / mot de passe : `Test123!` / Administrateur
 
 ## Évolutions futures
 
