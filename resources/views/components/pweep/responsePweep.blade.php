@@ -29,7 +29,7 @@
                     @endif
                 </picture>
             </div>
-        
+
             <div class="col-10">
                 <form action="{{ route('responsePweepPost', $pweep->id) }}" id="responsePweepPost" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
@@ -57,7 +57,7 @@
                             <button type="submit" class="btn btn-primary">Pweeper</button>
                         </div>
                     </div>
-                    @include('components.errors')
+                    @include('components.error.errors')
                 </form>
             </div>
         </div>

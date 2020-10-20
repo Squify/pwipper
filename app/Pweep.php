@@ -49,11 +49,6 @@ class Pweep extends Model
         return $this->hasOne('App\Pweep', 'initial_pweep_id', 'id');
     }
 
-    public function hashtags()
-    {
-        return $this->belongsToMany('App\Hashtag', 'pweeps_hashtags', 'hashtag_id', 'pweep_id');
-    }
-
     public function users_like()
     {
         return $this->belongsToMany('App\User', 'likes', 'pweep_id', 'user_id')->withTimestamps();

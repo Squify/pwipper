@@ -14,7 +14,7 @@ class AddResponseCounter extends Migration
     public function up()
     {
         Schema::table('pweeps', function (Blueprint $table) {
-            $table->unsignedBigInteger('response_counter')->nullable();
+            $table->unsignedBigInteger('response_counter')->default(0);
         });
     }
 
